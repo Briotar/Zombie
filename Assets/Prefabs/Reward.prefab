@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9124053328812278921}
-  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.17216258, y: 0.02266564, z: -0.12854326, w: 0.97638255}
+  m_LocalPosition: {x: -0.1163, y: -0.0666, z: -0.0242}
+  m_LocalScale: {x: 0.6919099, y: 0.6919099, z: 0.6919099}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 20, y: 0, z: -15}
 --- !u!212 &9124053328812278926
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 07955020e801ec24e9f4dd6ec6914fb1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -112,8 +112,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.088075794
-  m_Center: {x: 0, y: -0.078407876, z: 0.05480126}
+  m_Radius: 0.22810532
+  m_Center: {x: 0.10143513, y: -0.28238776, z: 0.11134447}
 --- !u!114 &3692722590442251495
 MonoBehaviour:
   m_ObjectHideFlags: 0

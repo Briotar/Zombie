@@ -1,12 +1,11 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerAnimationsController : MonoBehaviour
 {
     [SerializeField] private FloatingJoystick _joystick;
+    [SerializeField] private Animator _animator;
 
-    private Animator _animator;
     private Rigidbody _rigidbody;
     private Shooter _shooter;
     private QuarterChooser _quarterChooser;
@@ -19,7 +18,6 @@ public class PlayerAnimationsController : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
         _shooter = GetComponent<Shooter>();
         _quarterChooser = GetComponent<QuarterChooser>();
     }
