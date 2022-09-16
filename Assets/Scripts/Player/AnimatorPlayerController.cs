@@ -8,6 +8,7 @@ public class AnimatorPlayerController : MonoBehaviour
         public const string IsWalkBack = nameof(IsWalkBack);
         public const string IsStrafe = nameof(IsStrafe);
         public const string IsShooting = nameof(IsShooting);
+        public const string IsRunning = nameof(IsRunning);
     }
 
     public static class States
@@ -17,5 +18,6 @@ public class AnimatorPlayerController : MonoBehaviour
         public const string WalkBack = nameof(WalkBack);
         public const string Strafe = nameof(Strafe);
         public const string Fire = nameof(Fire);
+        public const string Run = nameof(Run);
     }
 }

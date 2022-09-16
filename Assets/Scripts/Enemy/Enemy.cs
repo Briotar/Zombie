@@ -10,6 +10,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _maxHealth;
     [SerializeField] private Canvas _canvas;
 
+    [SerializeField] private ParticleSystem _hitBlood;
+    [SerializeField] private ParticleSystem _hit;
+    [SerializeField] private ParticleSystem _dying;
+
     private float _currentHealth;
     private Animator _animator;
     private EnemyMover _mover;
@@ -37,6 +41,9 @@ public class Enemy : MonoBehaviour
         if(bullet = other.GetComponent<Bullet>())
         {
             ApplyDamage(bullet.Damage);
+
+            _hitBlood.Play();
+            _hit.Play();
         }
     }
 
@@ -58,6 +65,7 @@ public class Enemy : MonoBehaviour
 
     private void PrepareToDie()
     {
+        _dying.Play();
         _mover.StopMovement();
         _collider.enabled = false;
         _canvas.gameObject.SetActive(false);

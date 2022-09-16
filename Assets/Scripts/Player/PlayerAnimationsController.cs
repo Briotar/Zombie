@@ -32,26 +32,26 @@ public class PlayerAnimationsController : MonoBehaviour
             if(_shooter.IsShoot)
                 if(_enemyQuarter == _directionQuarter)
                 {
-                    SetAnimatorState(true, false, false);
+                    SetAnimatorState(true, false, false, false);
                 }
                 else if(Mathf.Abs(_enemyQuarter - _directionQuarter) == 2)
                 {
-                    SetAnimatorState(false, true, false);
+                    SetAnimatorState(false, true, false, false);
                 }
                 else if(Mathf.Abs(_enemyQuarter - _directionQuarter) == 1)
                 {
-                    SetAnimatorState(false, false, true);
+                    SetAnimatorState(false, false, true, false);
                 }
                 else
                 {
-                    SetAnimatorState(false, true, false);
+                    SetAnimatorState(false, true, false, false);
                 }
             else
-                SetAnimatorState(true, false, false);
+                SetAnimatorState(false, false, false, true);
         }
         else
         {
-            SetAnimatorState(false, false, false);
+            SetAnimatorState(false, false, false, false);
         }
     }
 
@@ -64,11 +64,12 @@ public class PlayerAnimationsController : MonoBehaviour
         _directionQuarter = _quarterChooser.ChooseQuarter(_joystick.Direction);
     }
 
-    private void SetAnimatorState(bool isWalking, bool isWalkBack, bool isStrafe)
+    private void SetAnimatorState(bool isWalking, bool isWalkBack, bool isStrafe, bool isRunning)
     {
         _animator.SetBool(AnimatorPlayerController.Params.IsWalking, isWalking);
         _animator.SetBool(AnimatorPlayerController.Params.IsWalkBack, isWalkBack);
         _animator.SetBool(AnimatorPlayerController.Params.IsStrafe, isStrafe);
+        _animator.SetBool(AnimatorPlayerController.Params.IsRunning, isRunning);
     }
 
     public void PlayShootAnimation()

@@ -6,8 +6,11 @@ using UnityEngine.UI;
 public class UpgradeArea : MonoBehaviour
 {
     [SerializeField] private PlayerCollector _playerCollector;
+    [SerializeField] private GameObject _effect;
     [SerializeField] private Image _fillImage;
-    
+    [SerializeField] private Image _frame;
+
+    private float _startAlphaColor = 0.7f;
     private float _coinsdecreaseSpeed = 0.05f;
     private int _currentUpgradeCost = 15;
     private bool _isCanUpgrade = false;
@@ -39,8 +42,10 @@ public class UpgradeArea : MonoBehaviour
     private void HasPlayerEnoughtCoins(int coins)
     {
         if (_currentUpgradeCost <= coins)
+        {
             _isCanUpgrade = true;
-
+            _effect.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,7 +54,14 @@ public class UpgradeArea : MonoBehaviour
         {
             StartCoroutine(UpgradeCoroutine());
             StartCoroutine(FillImageCoroutine());
+
+            _frame.color = new Color(_frame.color.r, _frame.color.g, _frame.color.b, 1f);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _frame.color = new Color(_frame.color.r, _frame.color.g, _frame.color.b, _startAlphaColor);
     }
 
     private IEnumerator UpgradeCoroutine()
@@ -89,5 +101,6 @@ public class UpgradeArea : MonoBehaviour
         UpgradeCostChanged.Invoke(_currentUpgradeCost);
 
         _isCanUpgrade = false;
+        _effect.SetActive(false);
     }
 }
