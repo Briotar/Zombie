@@ -39,7 +39,7 @@ public class WaveView : MonoBehaviour
 
     private void StartNextWave(int wave)
     {
-        _allWavesText.text = $"{wave}/10";
+        _allWavesText.text = $"{wave}";
         _currentWaveText.text = $"INCOMING...";
         _endWaveText.SetActive(true);
 

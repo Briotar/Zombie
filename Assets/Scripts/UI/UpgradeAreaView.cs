@@ -40,7 +40,6 @@ public class UpgradeAreaView : MonoBehaviour
     private void ShowUpgradePanel()
     {
         _upgradePanel.SetActive(true);
-        Time.timeScale = 0;
     }
 
     private void ShowNewCost(int newCost)

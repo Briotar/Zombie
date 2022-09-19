@@ -4,8 +4,6 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private SpawnPointsList _spawnPointList;
-
-    [SerializeField] private List<Transform> _spawnPoints;
     [SerializeField] private Enemy[] _enemies;
 
     [SerializeField] private float _timeToSpawnEmemies = 3f;

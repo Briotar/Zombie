@@ -9,10 +9,10 @@ public class UpgradeArea : MonoBehaviour
     [SerializeField] private GameObject _effect;
     [SerializeField] private Image _fillImage;
     [SerializeField] private Image _frame;
+    [SerializeField] private int _currentUpgradeCost = 15;
 
     private float _startAlphaColor = 0.7f;
     private float _coinsdecreaseSpeed = 0.05f;
-    private int _currentUpgradeCost = 15;
     private bool _isCanUpgrade = false;
 
     public event Action UpgradePanelReady;

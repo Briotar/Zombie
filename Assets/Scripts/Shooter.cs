@@ -21,7 +21,7 @@ public class Shooter : MonoBehaviour
 
     private void Update()
     {
-        _target = EnemiesList.Instance.TryGetNearstEnemy(this.transform);
+        _target = GetTarget();
 
         if (_target != null)
         {
@@ -53,5 +53,10 @@ public class Shooter : MonoBehaviour
     private void SetIsGunCanShot()
     {
         _gun.SetIsCanShot(_isShoot);
-    }    
+    }
+    
+    protected virtual Transform GetTarget()
+    {
+        return EnemiesList.Instance.TryGetNearstEnemy(this.transform);
+    }
 }

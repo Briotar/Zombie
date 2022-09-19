@@ -11,14 +11,13 @@ public class EnemyMover : MonoBehaviour
     private bool _isAlive = true;
     private Vector3 _lastTargetPosition;
 
-    private void Start()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-    }
-
     private void OnEnable()
     {
+        _rigidbody = GetComponent<Rigidbody>();
+
         EnemiesList.Instance.AddToList(this);
+        _rigidbody.useGravity = true;
+        _isAlive = true;
     }
 
     private void FixedUpdate()

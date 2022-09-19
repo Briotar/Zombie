@@ -5,13 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(EnemiesList))]
 public class WaveController : MonoBehaviour
 {
-    [SerializeField] private int _maxEnemiesOnWave = 10;
+    [SerializeField] private int _maxEnemiesOnWave = 18;
 
     private EnemySpawner _enemySpawner;
     private EnemiesList _enemiesList;
 
     private int _currentWave = 1;
-    private int _currentDeadEnemies = 0;
+    private int _currentDeadEnemies = 9;
 
     public event Action<int> NextWave;
     public event Action<float> EnemiesCountChanged;
@@ -39,7 +39,7 @@ public class WaveController : MonoBehaviour
         _enemySpawner = GetComponent<EnemySpawner>();
 
         EnemiesCountChanged.Invoke((float)_currentDeadEnemies / _maxEnemiesOnWave);
-        _enemySpawner.StartWave(_maxEnemiesOnWave);
+        _enemySpawner.StartWave(_maxEnemiesOnWave - _currentDeadEnemies);
     }
 
     private void IncreaseDeadEnemies()

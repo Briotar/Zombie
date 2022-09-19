@@ -8,6 +8,7 @@ public class EnemiesList : MonoBehaviour
 
     private List<EnemyMover> _enemies = new List<EnemyMover>();
     private EnemyMover _nearstEnemyToPlayer;
+    private EnemyMover _farthestEnemyToPlayer;
 
     public static EnemiesList Instance;
 
@@ -20,7 +21,7 @@ public class EnemiesList : MonoBehaviour
 
     private void Start()
     {
-        TryFindNearstEnemy(_player);
+        TryFindNearstandFarthestEnemy(_player);
     }
 
     private void ShowList()
@@ -31,12 +32,13 @@ public class EnemiesList : MonoBehaviour
         }
     }
 
-    private void TryFindNearstEnemy(Transform player)
+    private void TryFindNearstandFarthestEnemy(Transform player)
     {
         if(_enemies.Count != 0)
         {
             _nearstEnemyToPlayer = _enemies[0];
             var nearstEnemyDistance = (_enemies[0].transform.position - player.position).magnitude;
+            var farthestEnemyDistance = (_enemies[0].transform.position - player.position).magnitude;
 
             for (int i = 0; i < _enemies.Count; i++)
             {
@@ -47,20 +49,37 @@ public class EnemiesList : MonoBehaviour
                     _nearstEnemyToPlayer = _enemies[i];
                     nearstEnemyDistance = fromEnemyToPlayer;
                 }
+
+                if(fromEnemyToPlayer >= farthestEnemyDistance)
+                {
+                    _farthestEnemyToPlayer = _enemies[i];
+                    farthestEnemyDistance = fromEnemyToPlayer;
+                }
             }
         }
         else
         {
             _nearstEnemyToPlayer = null;
+            _farthestEnemyToPlayer = null;
         }
     }
 
     public Transform TryGetNearstEnemy(Transform player)
     {
-        TryFindNearstEnemy(player);
+        TryFindNearstandFarthestEnemy(player);
 
         if (_nearstEnemyToPlayer != null)
             return _nearstEnemyToPlayer.transform;
+        else
+            return null;
+    }
+
+    public Transform TryGetFarthestEnemy(Transform player)
+    {
+        TryFindNearstandFarthestEnemy(player);
+
+        if (_farthestEnemyToPlayer != null)
+            return _farthestEnemyToPlayer.transform;
         else
             return null;
     }

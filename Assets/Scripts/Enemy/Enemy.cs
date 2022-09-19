@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _maxHealth;
     [SerializeField] private Canvas _canvas;
 
+    private float _minPlayerDamage = 25;
     private float _currentHealth;
     private Animator _animator;
     private EnemyMover _mover;
@@ -22,14 +23,17 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
+        _collider = GetComponent<Collider>();
+
         _currentHealth = _maxHealth;
+        _collider.enabled = true;
+        _canvas.gameObject.SetActive(true);
     }
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _mover = GetComponent<EnemyMover>();
-        _collider = GetComponent<Collider>();
         _effects = GetComponent<EnemyEffects>();
     }
 
@@ -40,8 +44,6 @@ public class Enemy : MonoBehaviour
         if(bullet = other.GetComponent<Bullet>())
         {
             ApplyDamage(bullet.Damage);
-
-            _effects.PlayHitEffetcs();
         }
     }
 
@@ -49,6 +51,11 @@ public class Enemy : MonoBehaviour
     {
         _currentHealth -= damage;
         HealthChanged.Invoke(_currentHealth / _maxHealth);
+
+        if(damage < _minPlayerDamage)
+            _effects.PlayHitEffetcs(false);
+        else
+            _effects.PlayHitEffetcs(true);
 
         if (_currentHealth <= 0)
         {

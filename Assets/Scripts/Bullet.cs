@@ -9,11 +9,13 @@ public class Bullet : MonoBehaviour
     private float _currentLifeTime = 0f;
     private float _damage;
     private Rigidbody _rigidbody;
+    private ParticleSystem _bulletEffect;
 
     public float Damage => _damage;
 
     private void OnEnable()
     {
+        _bulletEffect = GetComponentInChildren<ParticleSystem>();
         _rigidbody = GetComponent<Rigidbody>();
         _currentLifeTime = 0f;
     }
@@ -29,12 +31,13 @@ public class Bullet : MonoBehaviour
     public void Init(Quaternion rotation, float damage)
     {
         gameObject.transform.rotation = rotation;
+        _bulletEffect.transform.rotation = rotation;
         _damage = damage;
 
         _rigidbody.velocity = transform.forward * _bulletSpeed;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<Enemy>())
         {
