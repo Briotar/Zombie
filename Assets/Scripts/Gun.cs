@@ -3,6 +3,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField] private float _shotCooldown;
+    [SerializeField] private ParticleSystem _shotEffect;
 
     private float _cooldownDecrease = 0.2f;
     private float _currentTime = 0f;
@@ -14,6 +15,7 @@ public class Gun : MonoBehaviour
             if (_currentTime >= _shotCooldown)
             {
                 Shot();
+                _shotEffect.Play();
 
                 _currentTime = 0f;
             }

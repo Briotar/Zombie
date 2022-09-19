@@ -1042,13 +1042,14 @@ GameObject:
   - component: {fileID: 4258290547250990733}
   - component: {fileID: 4258290547250990732}
   - component: {fileID: 4258290547250990735}
+  - component: {fileID: 1067172756455686141}
   m_Layer: 0
   m_Name: NewZombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4364768475381623148
 Transform:
   m_ObjectHideFlags: 0
@@ -1146,9 +1147,6 @@ MonoBehaviour:
   _enemyCenter: {fileID: 4258290546550353428}
   _maxHealth: 100
   _canvas: {fileID: 4258290546801514245}
-  _hitBlood: {fileID: 4944169782922664905}
-  _hit: {fileID: 9046818858920327494}
-  _dying: {fileID: 3202186627203382185}
 --- !u!114 &4258290547250990735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1163,6 +1161,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reward: []
   _spawnPoint: {fileID: 0}
+--- !u!114 &1067172756455686141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4024271248912659414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60ee1d0989c5d064c9f02c9caf9d5844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitBlood: {fileID: 4944169782922664905}
+  _hit: {fileID: 9046818858920327494}
+  _dying: {fileID: 3202186627203382185}
 --- !u!1 &4109357412510977217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1240,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.19999695, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1532,8 +1545,8 @@ RectTransform:
   m_Father: {fileID: 4258290546770507684}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1930,16 +1943,16 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5236812909505829536, guid: 414640c10404d3b4db1517882c6b93bd, type: 3}
-  - {fileID: -18547778212509510, guid: 414640c10404d3b4db1517882c6b93bd, type: 3}
-  - {fileID: 1589487249450911417, guid: 414640c10404d3b4db1517882c6b93bd, type: 3}
-  - {fileID: 5163063355849896902, guid: 414640c10404d3b4db1517882c6b93bd, type: 3}
-  - {fileID: 3370593207378328486, guid: 414640c10404d3b4db1517882c6b93bd, type: 3}
-  - {fileID: -2606634804167525036, guid: 414640c10404d3b4db1517882c6b93bd, type: 3}
-  - {fileID: -5254752162498044798, guid: 414640c10404d3b4db1517882c6b93bd, type: 3}
-  - {fileID: -6535512506995588235, guid: 414640c10404d3b4db1517882c6b93bd, type: 3}
-  - {fileID: 1493370413022115818, guid: 414640c10404d3b4db1517882c6b93bd, type: 3}
-  - {fileID: 145615223514590520, guid: 414640c10404d3b4db1517882c6b93bd, type: 3}
+  - {fileID: 2100000, guid: 50471c0891d61df449e86d6adaa211c5, type: 2}
+  - {fileID: 2100000, guid: 50471c0891d61df449e86d6adaa211c5, type: 2}
+  - {fileID: 2100000, guid: 50471c0891d61df449e86d6adaa211c5, type: 2}
+  - {fileID: 2100000, guid: 50471c0891d61df449e86d6adaa211c5, type: 2}
+  - {fileID: 2100000, guid: 50471c0891d61df449e86d6adaa211c5, type: 2}
+  - {fileID: 2100000, guid: 83c1dc5d77918c04c91a791b18f0ead4, type: 2}
+  - {fileID: 2100000, guid: a174184ab079c5d43a445716e1105b19, type: 2}
+  - {fileID: 2100000, guid: ad2eb5f9f78aff141a01d36bc8e52ada, type: 2}
+  - {fileID: 2100000, guid: de33ecda5a1471b4f8df1554cfec6e6e, type: 2}
+  - {fileID: 2100000, guid: a174184ab079c5d43a445716e1105b19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2854,11 +2867,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1764803553877789041, guid: 67c55e5aeedd2e240904f59ce1b7c98b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.088
+      value: 0.036
       objectReference: {fileID: 0}
     - target: {fileID: 1764803553877789041, guid: 67c55e5aeedd2e240904f59ce1b7c98b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.061
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1764803553877789041, guid: 67c55e5aeedd2e240904f59ce1b7c98b, type: 3}
       propertyPath: m_LocalRotation.w

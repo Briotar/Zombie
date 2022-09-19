@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
         _rigidbody.velocity = transform.forward * _bulletSpeed;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if(other.GetComponent<Enemy>())
         {

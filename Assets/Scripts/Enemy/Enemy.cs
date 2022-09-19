@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyMover))]
+[RequireComponent(typeof(EnemyEffects))]
 [RequireComponent(typeof(Collider))]
 public class Enemy : MonoBehaviour
 {
@@ -10,14 +11,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _maxHealth;
     [SerializeField] private Canvas _canvas;
 
-    [SerializeField] private ParticleSystem _hitBlood;
-    [SerializeField] private ParticleSystem _hit;
-    [SerializeField] private ParticleSystem _dying;
-
     private float _currentHealth;
     private Animator _animator;
     private EnemyMover _mover;
     private Collider _collider;
+    private EnemyEffects _effects;
 
     public event Action Died;
     public event Action<float> HealthChanged;
@@ -32,6 +30,7 @@ public class Enemy : MonoBehaviour
         _animator = GetComponent<Animator>();
         _mover = GetComponent<EnemyMover>();
         _collider = GetComponent<Collider>();
+        _effects = GetComponent<EnemyEffects>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,8 +41,7 @@ public class Enemy : MonoBehaviour
         {
             ApplyDamage(bullet.Damage);
 
-            _hitBlood.Play();
-            _hit.Play();
+            _effects.PlayHitEffetcs();
         }
     }
 
@@ -65,7 +63,7 @@ public class Enemy : MonoBehaviour
 
     private void PrepareToDie()
     {
-        _dying.Play();
+        _effects.PLayDeathEffect();
         _mover.StopMovement();
         _collider.enabled = false;
         _canvas.gameObject.SetActive(false);
