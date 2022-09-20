@@ -6,6 +6,7 @@ public class UpgradeButtonsController : MonoBehaviour
     [SerializeField] private GameObject _upgradePanel;
     [SerializeField] private Gun _playerGun;
     [SerializeField] private PlayerEffects _effect;
+    [SerializeField] private float _secondsBeforeStop = 0.55f;
 
     private Animator[] _objectsOnPanel;
 
@@ -14,7 +15,7 @@ public class UpgradeButtonsController : MonoBehaviour
         _objectsOnPanel = GetComponentsInChildren<Animator>();
 
         StartCoroutine(PlayButtonsAnimCoroutine(true));
-        StartCoroutine(SetTimeScale());
+        StartCoroutine(SetTimeScale(_secondsBeforeStop));
     }
 
     private IEnumerator PlayButtonsAnimCoroutine(bool isAnimatorActive)
@@ -32,9 +33,9 @@ public class UpgradeButtonsController : MonoBehaviour
         _upgradePanel.SetActive(isAnimatorActive);
     }
 
-    private IEnumerator SetTimeScale()
+    private IEnumerator SetTimeScale(float seconds)
     {
-        yield return new WaitForSeconds(0.55f);
+        yield return new WaitForSeconds(seconds);
         Time.timeScale = 0;
     }
 

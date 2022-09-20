@@ -5,7 +5,8 @@ using TMPro;
 public class UpgradeAreaView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _costText;
-    [SerializeField] private GameObject _upgradePanel;
+    [SerializeField] private GameObject _firstUpgradePanel;
+    [SerializeField] private GameObject _secondUpgradePanel;
 
     private UpgradeArea _upgradeArea;
 
@@ -13,9 +14,14 @@ public class UpgradeAreaView : MonoBehaviour
     {
         _upgradeArea = GetComponent<UpgradeArea>();
 
-        _upgradeArea.UpgradePanelReady += () =>
+        _upgradeArea.FirstUpgradePanel += () =>
         {
-            ShowUpgradePanel();
+            ShowUpgradePanel(_firstUpgradePanel);
+        };
+
+        _upgradeArea.SecondUpgradePanel += () =>
+        {
+            ShowUpgradePanel(_secondUpgradePanel);
         };
 
         _upgradeArea.UpgradeCostChanged += (int newCost) =>
@@ -26,9 +32,14 @@ public class UpgradeAreaView : MonoBehaviour
 
     private void OnDisable()
     {
-        _upgradeArea.UpgradePanelReady -= () =>
+        _upgradeArea.FirstUpgradePanel -= () =>
         {
-            ShowUpgradePanel();
+            ShowUpgradePanel(_firstUpgradePanel);
+        };
+
+        _upgradeArea.SecondUpgradePanel -= () =>
+        {
+            ShowUpgradePanel(_secondUpgradePanel);
         };
 
         _upgradeArea.UpgradeCostChanged -= (int newCost) =>
@@ -37,9 +48,9 @@ public class UpgradeAreaView : MonoBehaviour
         };
     }
 
-    private void ShowUpgradePanel()
+    private void ShowUpgradePanel(GameObject panel)
     {
-        _upgradePanel.SetActive(true);
+        panel.SetActive(true);
     }
 
     private void ShowNewCost(int newCost)

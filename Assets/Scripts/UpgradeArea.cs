@@ -14,8 +14,10 @@ public class UpgradeArea : MonoBehaviour
     private float _startAlphaColor = 0.7f;
     private float _coinsdecreaseSpeed = 0.05f;
     private bool _isCanUpgrade = false;
+    private int _upgradesCount = 1;
 
-    public event Action UpgradePanelReady;
+    public event Action FirstUpgradePanel;
+    public event Action SecondUpgradePanel;
     public event Action<int> UpgradeCostChanged;
 
     private void OnEnable()
@@ -97,10 +99,15 @@ public class UpgradeArea : MonoBehaviour
     {
         _currentUpgradeCost *= 2;
 
-        UpgradePanelReady.Invoke();
-        UpgradeCostChanged.Invoke(_currentUpgradeCost);
+        if(_upgradesCount == 1)
+            FirstUpgradePanel.Invoke();
+        else 
+            SecondUpgradePanel.Invoke();
 
+        UpgradeCostChanged.Invoke(_currentUpgradeCost);
         _isCanUpgrade = false;
         _effect.SetActive(false);
+
+        _upgradesCount++;
     }
 }
