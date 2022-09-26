@@ -38,7 +38,7 @@ public class EnemyHealthBar : MonoBehaviour
     {
         transform.rotation = _startRotation;
 
-        _damageEffect.fillAmount = Mathf.Lerp(_damageEffect.fillAmount, _slider.value, _lerpSpeed);
+        _damageEffect.fillAmount = Mathf.MoveTowards(_damageEffect.fillAmount, _slider.value, _lerpSpeed);
     }
 
     private void ChangeHealth(float currentHealth)

@@ -10,6 +10,7 @@ public class UpgradeArea : MonoBehaviour
     [SerializeField] private Image _fillImage;
     [SerializeField] private Image _frame;
     [SerializeField] private int _currentUpgradeCost = 15;
+    [SerializeField] private float _delayBeforeUpgrade = 0.3f;
 
     private float _startAlphaColor = 0.7f;
     private float _coinsdecreaseSpeed = 0.05f;
@@ -54,8 +55,7 @@ public class UpgradeArea : MonoBehaviour
     {
         if (_isCanUpgrade && other.GetComponent<Player>())
         {
-            StartCoroutine(UpgradeCoroutine());
-            StartCoroutine(FillImageCoroutine());
+            StartCoroutine(DelayCoroutine());
 
             _frame.color = new Color(_frame.color.r, _frame.color.g, _frame.color.b, 1f);
         }
@@ -64,6 +64,14 @@ public class UpgradeArea : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         _frame.color = new Color(_frame.color.r, _frame.color.g, _frame.color.b, _startAlphaColor);
+    }
+
+    private IEnumerator DelayCoroutine()
+    {
+        yield return new WaitForSeconds(_delayBeforeUpgrade);
+
+        StartCoroutine(UpgradeCoroutine());
+        StartCoroutine(FillImageCoroutine());
     }
 
     private IEnumerator UpgradeCoroutine()

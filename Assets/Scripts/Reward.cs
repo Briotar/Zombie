@@ -8,12 +8,14 @@ public class Reward : MonoBehaviour
     [SerializeField] private float _speed = 5;
     [SerializeField] private float _forse = 0.23f;
     [SerializeField] private float _collectDistance = 3f;
+    [SerializeField] private float _collectSpeed = 1.8f;
 
     private Rigidbody _rigidbody;
     private Collider _collider;
     private Transform _player;
 
     private bool _canCollect = false;
+    private bool _isNeedToAddForse = true;
 
     private void OnEnable()
     {
@@ -50,7 +52,7 @@ public class Reward : MonoBehaviour
                 _collider.isTrigger = true;
                 var velocity = (_player.position - gameObject.transform.position).normalized * _speed;
 
-                _rigidbody.velocity = velocity;
+                _rigidbody.velocity = velocity * _collectSpeed;
             }
         }
     }
@@ -71,7 +73,7 @@ public class Reward : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.GetComponent<Enemy>())
+        if(collision.gameObject.GetComponent<Enemy>() || collision.gameObject.GetComponent<Reward>())
         {
             Physics.IgnoreCollision(_collider, collision.collider);
         }

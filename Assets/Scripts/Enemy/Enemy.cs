@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform _enemyCenter;
     [SerializeField] private float _maxHealth;
     [SerializeField] private Canvas _canvas;
+    [SerializeField] private Animator _animatorCanvas;
 
     private float _minPlayerDamage = 25;
     private float _currentHealth;
@@ -73,7 +74,7 @@ public class Enemy : MonoBehaviour
         _effects.PLayDeathEffect();
         _mover.StopMovement();
         _collider.enabled = false;
-        _canvas.gameObject.SetActive(false);
+        _animatorCanvas.enabled = true;
 
         RewardsManager.Instance.SpawnReward(_enemyCenter);
 

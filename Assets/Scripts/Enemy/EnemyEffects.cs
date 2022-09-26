@@ -7,6 +7,7 @@ public class EnemyEffects : MonoBehaviour
     [SerializeField] private ParticleSystem _dying;
     [SerializeField] private ParticleSystem _text25;
     [SerializeField] private ParticleSystem _text8;
+    [SerializeField] private ParticleSystem _explosion;
 
     private Vector3 _startPosition;
     private bool _isDying = false;
@@ -26,6 +27,7 @@ public class EnemyEffects : MonoBehaviour
 
         _hitBlood.Play();
         _hit.Play();
+        _explosion.Play();
     }
 
     public void PLayDeathEffect()

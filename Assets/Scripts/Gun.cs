@@ -5,7 +5,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float _shotCooldown;
     [SerializeField] private ParticleSystem _shotEffect;
 
-    private float _cooldownDecrease = 0.2f;
+    private float _cooldownDecrease = 0.1f;
     private float _currentTime = 0f;
     private bool _canShot = false;
 

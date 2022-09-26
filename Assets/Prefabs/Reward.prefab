@@ -130,3 +130,4 @@ MonoBehaviour:
   _speed: 5
   _forse: 0.23
   _collectDistance: 3
+  _collectSpeed: 1.7
