@@ -1207,7 +1207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a530d7753897c304ea6bc50594a2f400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.7
+  _speed: 0.85
 --- !u!114 &4258290547250990732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1746,7 +1746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 6.12}
+  m_AnchoredPosition: {x: 0, y: 6.35}
   m_SizeDelta: {x: 14.168, y: 8.3306}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4258290546801514245
@@ -1824,7 +1824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemy: {fileID: 4258290547250990732}
   _damageEffect: {fileID: 2448073604290209111}
-  _lerpSpeed: 0.003
+  _lerpSpeed: 0.012
 --- !u!95 &1278084998
 Animator:
   serializedVersion: 3
@@ -3032,19 +3032,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1764803553858358361, guid: 67c55e5aeedd2e240904f59ce1b7c98b, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.6862745
+      value: 0.47058824
       objectReference: {fileID: 0}
     - target: {fileID: 1764803553858358361, guid: 67c55e5aeedd2e240904f59ce1b7c98b, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.43921572
+      value: 0.38768244
       objectReference: {fileID: 0}
     - target: {fileID: 1764803553858358361, guid: 67c55e5aeedd2e240904f59ce1b7c98b, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.92549026
+      value: 0.8301887
       objectReference: {fileID: 0}
     - target: {fileID: 1764803553858358361, guid: 67c55e5aeedd2e240904f59ce1b7c98b, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.4784314
+      value: 0.42525372
       objectReference: {fileID: 0}
     - target: {fileID: 1764803553858358361, guid: 67c55e5aeedd2e240904f59ce1b7c98b, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.size

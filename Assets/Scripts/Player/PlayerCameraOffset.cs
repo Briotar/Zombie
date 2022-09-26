@@ -21,7 +21,7 @@ public class PlayerCameraOffset : MonoBehaviour
             var offsetZ = (_shooter.TargetPosition.z - _shooter.transform.position.z) / _distanceToEnemy;
             var newPosition = new Vector3(_shooter.transform.position.x + offsetX, transform.position.y, _shooter.transform.position.z + offsetZ);
 
-            transform.position = Vector3.Lerp(transform.position, newPosition, _lerpSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, newPosition, _lerpSpeed);
         }
         else
         {
