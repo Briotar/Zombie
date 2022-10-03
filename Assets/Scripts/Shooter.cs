@@ -4,9 +4,11 @@ using UnityEngine;
 public class Shooter : MonoBehaviour
 {
     [SerializeField] private float _shootDistance = 5f;
+    [SerializeField] private Transform _shootPoint;
 
     private Gun _gun;
     private Transform _target;
+    private float _enemyCenterY = 1f;
     private bool _isShoot = false;
 
     public bool IsShoot => _isShoot;
@@ -30,9 +32,18 @@ public class Shooter : MonoBehaviour
 
             if(distance <= _shootDistance)
             {
-                _isShoot = true;
+                if(CheckIsTargetVisiable())
+                {
+                    _isShoot = true;
 
-                SetIsGunCanShot();
+                    SetIsGunCanShot();
+                }
+                else
+                {
+                    _isShoot = false;
+
+                    SetIsGunCanShot();
+                }
             }
             else
             {
@@ -53,6 +64,19 @@ public class Shooter : MonoBehaviour
     private void SetIsGunCanShot()
     {
         _gun.SetIsCanShot(_isShoot);
+    }
+
+    private bool CheckIsTargetVisiable()
+    {
+        var direction = _target.position - _shootPoint.position;
+        direction = new Vector3(direction.x, direction.y + _enemyCenterY, direction.z);
+
+        Physics.Raycast(_shootPoint.position, direction, out RaycastHit hitInfo);
+
+        if (hitInfo.collider.gameObject.GetComponent<Enemy>())
+            return true;
+        else
+            return false;
     }
     
     protected virtual Transform GetTarget()

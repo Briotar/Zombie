@@ -24,9 +24,9 @@ public class PlayerCollector : MonoBehaviour
         }
     }
 
-    public void DecreaseCoin()
+    public void DecreaseCoin(int count)
     {
-        _currentCountCoins--;
+        _currentCountCoins -= count;
         CoinsCountChanged.Invoke(_currentCountCoins);
     }
 }

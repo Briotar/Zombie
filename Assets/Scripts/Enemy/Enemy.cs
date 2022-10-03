@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     {
         _collider = GetComponent<Collider>();
 
+        _animatorCanvas.enabled = false;
         _currentHealth = _maxHealth;
         _collider.enabled = true;
         _canvas.gameObject.SetActive(true);
@@ -72,7 +73,7 @@ public class Enemy : MonoBehaviour
     private void PrepareToDie()
     {
         _effects.PLayDeathEffect();
-        _mover.StopMovement();
+        _mover.StartDying();
         _collider.enabled = false;
         _animatorCanvas.enabled = true;
 

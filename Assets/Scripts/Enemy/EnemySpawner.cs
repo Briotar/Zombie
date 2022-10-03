@@ -39,18 +39,10 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemies()
     {
         int currentEnemyCount = 0;
-        //System.Random rand = new System.Random();
+        System.Random rand = new System.Random();
 
-        int maxEnemyCountSpawn;
-        //int maxEnemyCountSpawn = rand.Next(_minEnemiesOnSpawn, _maxEnemiesOnSpawn + 1);
+        int maxEnemyCountSpawn = rand.Next(_minEnemiesOnSpawn, _maxEnemiesOnSpawn + 1);
         Vector3 spawnPoint = _spawnPointList.GetSpawnPoint();
-
-        if(_spawnCounter == 0)
-            maxEnemyCountSpawn = 3;
-        else if(_spawnCounter == 1)
-            maxEnemyCountSpawn = 4;
-        else 
-            maxEnemyCountSpawn = 2;
 
         for (int i = 0; i < _enemies.Length; i++)
         {
@@ -79,6 +71,7 @@ public class EnemySpawner : MonoBehaviour
     public void StartWave(int maxEnemiesOnWave)
     {
         _maxEnemiesOnWave = maxEnemiesOnWave;
+        _spawnedEnemiesCount = 0;
         _isCanSpawn = true;
     }
 }

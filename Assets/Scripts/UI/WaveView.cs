@@ -11,6 +11,8 @@ public class WaveView : MonoBehaviour
     [SerializeField] private Slider _slider;
     [SerializeField] private GameObject _endWaveText;
 
+    private int _currentWave;
+
     private void OnEnable()
     {
         _waveController.NextWave += (int wave) =>
@@ -39,7 +41,9 @@ public class WaveView : MonoBehaviour
 
     private void StartNextWave(int wave)
     {
-        _allWavesText.text = $"{wave}";
+        _currentWave = wave;
+
+        _allWavesText.text = $"{_currentWave}";
         _currentWaveText.text = $"INCOMING...";
         _endWaveText.SetActive(true);
 
@@ -59,5 +63,7 @@ public class WaveView : MonoBehaviour
 
             _slider.value -= Time.deltaTime / 10f;
         }
+
+        _currentWaveText.text = $"WAVE {_currentWave}";
     }
 }

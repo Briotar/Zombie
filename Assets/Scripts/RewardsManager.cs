@@ -16,8 +16,10 @@ public class RewardsManager : MonoBehaviour
         Instance = this;
     }
 
-    public void SpawnReward(Transform enemyCenter)
+    public void SpawnReward(Transform enemyCenter, int maxRewards = 3)
     {
+        _maxSpawnedRewards = maxRewards;
+
         for (int i = 0; i < _rewards.Count; i++)
         {
             if(_spawnedRewards < _maxSpawnedRewards)

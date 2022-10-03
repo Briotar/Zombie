@@ -5,13 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(EnemiesList))]
 public class WaveController : MonoBehaviour
 {
-    [SerializeField] private int _maxEnemiesOnWave = 18;
+    [SerializeField] private int _maxEnemiesOnWave = 4;
+    [SerializeField] private int _increaseCount = 1;
 
     private EnemySpawner _enemySpawner;
     private EnemiesList _enemiesList;
 
     private int _currentWave = 1;
-    private int _currentDeadEnemies = 9;
+    private int _currentDeadEnemies = 0;
 
     public event Action<int> NextWave;
     public event Action<float> EnemiesCountChanged;
@@ -38,8 +39,7 @@ public class WaveController : MonoBehaviour
     {
         _enemySpawner = GetComponent<EnemySpawner>();
 
-        EnemiesCountChanged.Invoke((float)_currentDeadEnemies / _maxEnemiesOnWave);
-        _enemySpawner.StartWave(_maxEnemiesOnWave - _currentDeadEnemies);
+        StartNextWave();
     }
 
     private void IncreaseDeadEnemies()
@@ -48,12 +48,22 @@ public class WaveController : MonoBehaviour
         EnemiesCountChanged.Invoke((float)_currentDeadEnemies / _maxEnemiesOnWave);
 
         if (_currentDeadEnemies >= _maxEnemiesOnWave)
-            StartNextWave();
+            PrepareStartNextWave();
     }
 
-    private void StartNextWave()
+    private void PrepareStartNextWave()
     {
         _currentWave++;
+
+        _currentDeadEnemies = 0;
+        _maxEnemiesOnWave += _increaseCount;
+
         NextWave.Invoke(_currentWave);
+    }
+
+    public void StartNextWave()
+    {
+        EnemiesCountChanged.Invoke((float)_currentDeadEnemies / _maxEnemiesOnWave);
+        _enemySpawner.StartWave(_maxEnemiesOnWave - _currentDeadEnemies);
     }
 }

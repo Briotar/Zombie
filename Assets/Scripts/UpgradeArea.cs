@@ -15,6 +15,7 @@ public class UpgradeArea : MonoBehaviour
     private float _startAlphaColor = 0.7f;
     private float _coinsdecreaseSpeed = 0.05f;
     private bool _isCanUpgrade = false;
+    private bool _isPlayerStay = false;
     private int _upgradesCount = 1;
 
     public event Action FirstUpgradePanel;
@@ -61,8 +62,18 @@ public class UpgradeArea : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (_isCanUpgrade && other.GetComponent<Player>())
+        {
+            _isPlayerStay = true;
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
+        _isPlayerStay = false;
+        _fillImage.fillAmount = 0f;
         _frame.color = new Color(_frame.color.r, _frame.color.g, _frame.color.b, _startAlphaColor);
     }
 
@@ -78,22 +89,25 @@ public class UpgradeArea : MonoBehaviour
     {
         var coinsSpended = 0;
 
-        while (coinsSpended != _currentUpgradeCost)
+        while (coinsSpended != _currentUpgradeCost && _isPlayerStay)
         {
             coinsSpended++;
-            _playerCollector.DecreaseCoin();
 
             yield return new WaitForSeconds(_coinsdecreaseSpeed);
         }
 
-        NextUpgrade();
+        if(coinsSpended == _currentUpgradeCost)
+        {
+            _playerCollector.DecreaseCoin(coinsSpended);
+            NextUpgrade();
+        }
     }
 
     private IEnumerator FillImageCoroutine()
     {
         var time = _currentUpgradeCost * _coinsdecreaseSpeed;
 
-        while(_fillImage.fillAmount != 1f)
+        while (_fillImage.fillAmount != 1f && _isPlayerStay)
         {
             _fillImage.fillAmount += Time.deltaTime / time;
 

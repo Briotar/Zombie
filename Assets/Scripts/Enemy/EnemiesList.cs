@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemiesList : MonoBehaviour
 {
+    [SerializeField] private Transform _house;
     [SerializeField] private Transform _player;
 
     private List<EnemyMover> _enemies = new List<EnemyMover>();
@@ -87,7 +88,7 @@ public class EnemiesList : MonoBehaviour
     public void AddToList(EnemyMover enemy)
     {
         _enemies.Add(enemy);
-        enemy.SetTarget(_player);
+        enemy.SetTarget(_house);
     }
 
     public void RemoveFromList(EnemyMover enemy)

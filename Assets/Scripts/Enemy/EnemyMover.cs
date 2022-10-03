@@ -1,55 +1,85 @@
+using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Enemy))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMover : MonoBehaviour
 {
-    [SerializeField] private float _speed = 1f;
-    
-    private Transform _target;
-    private Rigidbody _rigidbody;
+    [SerializeField] private AttackPointsList _attackPointsList;
 
-    private bool _isAlive = true;
-    private Vector3 _lastTargetPosition;
+    private NavMeshAgent _agent;
+    private Rigidbody _rigidbody;
+    private Enemy _enemy;
+    private Transform _house;
+    private Quaternion _lastRotation;
+
+    private bool _isLookAtHouse = false;
+    private bool _isDied = false;
+
+    public event Action<Transform> EnemyReachedTarget;
 
     private void OnEnable()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _enemy = gameObject.GetComponent<Enemy>();
+        _agent = GetComponent<NavMeshAgent>();
 
         EnemiesList.Instance.AddToList(this);
+
+        _agent.enabled = true;
+        _agent.destination = _attackPointsList.GetAttackPoint(_enemy);
         _rigidbody.useGravity = true;
-        _isAlive = true;
+
+        _isDied = false;
     }
 
     private void FixedUpdate()
     {
-        if(_isAlive)
-        {
-            _rigidbody.velocity = (_target.position - gameObject.transform.position).normalized * _speed;
+        if ((_agent.pathEndPosition - _agent.destination).magnitude <= 0.1f)
+            if (_agent.remainingDistance <= 0.01f)
+            {
+                EnemyReachedTarget.Invoke(_house);
+                _agent.enabled = false;
 
-            transform.rotation = Quaternion.LookRotation(new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z));
-        }
-        else
+                _isLookAtHouse = true;
+            }
+
+        if(_isLookAtHouse)
         {
-            Vector3 rotaion = (_lastTargetPosition - gameObject.transform.position).normalized;
+            Vector3 rotaion = (_house.position - gameObject.transform.position).normalized;
             Vector3 rotaionXZ = new Vector3(rotaion.x, 0f, rotaion.z);
 
             transform.rotation = Quaternion.LookRotation(rotaionXZ);
         }
+
+        if(_isDied)
+        {
+            transform.rotation = _lastRotation;
+        }
     }
 
-    public void SetTarget(Transform target)
+    public void SetTarget(Transform house)
     {
-        _target = target;
+        _house = house;
+    }
+
+    public void StartDying()
+    {
+        _isDied = true;
+        _rigidbody.useGravity = false;
+        _agent.enabled = false;
+        _lastRotation = transform.rotation;
+
+        StopMovement();
+
+        EnemiesList.Instance.RemoveFromList(this);
     }
 
     public void StopMovement()
     {
-        _isAlive = false;
-        _lastTargetPosition = _target.position;
-        _rigidbody.useGravity = false;
         _rigidbody.velocity = Vector3.zero;
-
-        EnemiesList.Instance.RemoveFromList(this);
     }
 
     public void MoveUnderGround()
