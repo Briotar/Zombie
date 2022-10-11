@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class AttackPoint : MonoBehaviour
 {
+    [SerializeField] private Transform _building;
+
     private bool _isAvailable = true;
 
     public bool IsAvailable => _isAvailable;
@@ -19,6 +21,7 @@ public class AttackPoint : MonoBehaviour
     public void SetEnemy(Enemy enemy)
     {
         _isAvailable = false;
+        enemy.SetTarget(_building);
 
         enemy.Died += () =>
         {

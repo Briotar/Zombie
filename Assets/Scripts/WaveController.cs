@@ -7,6 +7,7 @@ public class WaveController : MonoBehaviour
 {
     [SerializeField] private int _maxEnemiesOnWave = 4;
     [SerializeField] private int _increaseCount = 1;
+    [SerializeField] private int _maxWaves = 3;
 
     private EnemySpawner _enemySpawner;
     private EnemiesList _enemiesList;
@@ -15,6 +16,7 @@ public class WaveController : MonoBehaviour
     private int _currentDeadEnemies = 0;
 
     public event Action<int> NextWave;
+    public event Action LastWave;
     public event Action<float> EnemiesCountChanged;
 
     private void OnEnable()
@@ -58,7 +60,10 @@ public class WaveController : MonoBehaviour
         _currentDeadEnemies = 0;
         _maxEnemiesOnWave += _increaseCount;
 
-        NextWave.Invoke(_currentWave);
+        if (_currentWave == (_maxWaves + 1))
+            LastWave.Invoke();
+        else
+            NextWave.Invoke(_currentWave);
     }
 
     public void StartNextWave()

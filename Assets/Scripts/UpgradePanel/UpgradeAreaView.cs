@@ -1,18 +1,18 @@
 using UnityEngine;
 using TMPro;
 
-[RequireComponent(typeof(UpgradeArea))]
+[RequireComponent(typeof(UpgradePanelPlayer))]
 public class UpgradeAreaView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _costText;
     [SerializeField] private GameObject _firstUpgradePanel;
     [SerializeField] private GameObject _secondUpgradePanel;
 
-    private UpgradeArea _upgradeArea;
+    private UpgradePanelPlayer _upgradeArea;
 
     private void OnEnable()
     {
-        _upgradeArea = GetComponent<UpgradeArea>();
+        _upgradeArea = GetComponent<UpgradePanelPlayer>();
 
         _upgradeArea.FirstUpgradePanel += () =>
         {

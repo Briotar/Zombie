@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HouseView : MonoBehaviour
+public class BuildingView : MonoBehaviour
 {
-    [SerializeField] private House _house;
+    [SerializeField] private Building _building;
     [SerializeField] private Slider _slider;
 
     private void OnEnable()
     {
-        _house.HealthChanged += (float health) =>
+        _building.HealthChanged += (float health) =>
         {
             ShowHealth(health);
         };
@@ -16,7 +16,7 @@ public class HouseView : MonoBehaviour
 
     private void OnDisable()
     {
-        _house.HealthChanged -= (float health) =>
+        _building.HealthChanged -= (float health) =>
         {
             ShowHealth(health);
         };

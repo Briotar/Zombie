@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 public class AttackPointsList : MonoBehaviour
 {
@@ -28,7 +29,6 @@ public class AttackPointsList : MonoBehaviour
 
         if (closestPoint == null)
         {
-            Debug.Log("Kak suka");
             return Vector3.zero;
         }
         else
@@ -37,5 +37,10 @@ public class AttackPointsList : MonoBehaviour
 
             return closestPoint.transform.position;
         }
+    }
+
+    public void AddPointsToList(AttackPoint[] newPoints)
+    {
+        _allAttackPoints = _allAttackPoints.Concat(newPoints).ToArray();
     }
 }

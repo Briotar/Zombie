@@ -88,7 +88,7 @@ public class EnemiesList : MonoBehaviour
     public void AddToList(EnemyMover enemy)
     {
         _enemies.Add(enemy);
-        enemy.SetTarget(_house);
+        //enemy.SetTarget(_house);
     }
 
     public void RemoveFromList(EnemyMover enemy)

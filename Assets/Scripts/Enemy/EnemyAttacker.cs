@@ -6,7 +6,7 @@ public class EnemyAttacker : MonoBehaviour
 {
     [SerializeField] private float _damage = 2f;
     
-    private House _house;
+    private Building _building;
     private EnemyMover _mover;
     private Animator _animator;
 
@@ -14,17 +14,17 @@ public class EnemyAttacker : MonoBehaviour
     {
         _mover = GetComponent<EnemyMover>();
 
-        _mover.EnemyReachedTarget += (Transform house) =>
+        _mover.EnemyReachedTarget += (Transform building) =>
         {
-            StartAttack(house);
+            StartAttack(building);
         };
     }
 
     private void OnDisable()
     {
-        _mover.EnemyReachedTarget -= (Transform house) =>
+        _mover.EnemyReachedTarget -= (Transform building) =>
         {
-            StartAttack(house);
+            StartAttack(building);
         };
     }
 
@@ -33,14 +33,14 @@ public class EnemyAttacker : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void StartAttack(Transform house)
+    private void StartAttack(Transform building)
     {
-        _house = house.gameObject.GetComponent<House>();
+        _building = building.gameObject.GetComponent<Building>();
         _animator.SetBool(AnimatorEnemyController.Params.IsAttacking, true);
     }
 
     public void Attack()
     {
-        _house.Applydamage(_damage);
+        _building.Applydamage(_damage);
     }
 }

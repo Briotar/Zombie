@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         _collider = GetComponent<Collider>();
+        _mover = GetComponent<EnemyMover>();
 
         _animatorCanvas.enabled = false;
         _currentHealth = _maxHealth;
@@ -35,7 +36,6 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _mover = GetComponent<EnemyMover>();
         _effects = GetComponent<EnemyEffects>();
     }
 
@@ -94,5 +94,10 @@ public class Enemy : MonoBehaviour
         _mover.MoveUnderGround();
 
         StartCoroutine(DyingCoroutine());
+    }
+
+    public void SetTarget(Transform building)
+    {
+        _mover.SetTarget(building);
     }
 }

@@ -10,6 +10,8 @@ public class WaveView : MonoBehaviour
     [SerializeField] private TMP_Text _currentWaveText;
     [SerializeField] private Slider _slider;
     [SerializeField] private GameObject _endWaveText;
+    [SerializeField] private GameObject _levelCompletePanel;
+    [SerializeField] private TMP_Text _nextWaveNumber;
 
     private int _currentWave;
 
@@ -18,6 +20,11 @@ public class WaveView : MonoBehaviour
         _waveController.NextWave += (int wave) =>
         {
             StartNextWave(wave);
+        };
+
+        _waveController.LastWave += () =>
+        {
+            StartLastWave();
         };
 
         _waveController.EnemiesCountChanged += (float sliderValue) =>
@@ -33,6 +40,11 @@ public class WaveView : MonoBehaviour
             StartNextWave(wave);
         };
 
+        _waveController.LastWave -= () =>
+        {
+            StartLastWave();
+        };
+
         _waveController.EnemiesCountChanged -= (float sliderValue) =>
         {
             ChangeSliderValue(sliderValue);
@@ -45,6 +57,7 @@ public class WaveView : MonoBehaviour
 
         _allWavesText.text = $"{_currentWave}";
         _currentWaveText.text = $"INCOMING...";
+        _nextWaveNumber.text = $"WAVE {wave}";
         _endWaveText.SetActive(true);
 
         StartCoroutine(SliderCoroutine());
@@ -65,5 +78,10 @@ public class WaveView : MonoBehaviour
         }
 
         _currentWaveText.text = $"WAVE {_currentWave}";
+    }
+
+    private void StartLastWave()
+    {
+        _levelCompletePanel.SetActive(true);
     }
 }

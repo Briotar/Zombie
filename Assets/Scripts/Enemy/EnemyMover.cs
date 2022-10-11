@@ -12,7 +12,7 @@ public class EnemyMover : MonoBehaviour
     private NavMeshAgent _agent;
     private Rigidbody _rigidbody;
     private Enemy _enemy;
-    private Transform _house;
+    private Transform _building;
     private Quaternion _lastRotation;
 
     private bool _isLookAtHouse = false;
@@ -40,7 +40,7 @@ public class EnemyMover : MonoBehaviour
         if ((_agent.pathEndPosition - _agent.destination).magnitude <= 0.1f)
             if (_agent.remainingDistance <= 0.01f)
             {
-                EnemyReachedTarget.Invoke(_house);
+                EnemyReachedTarget.Invoke(_building);
                 _agent.enabled = false;
 
                 _isLookAtHouse = true;
@@ -48,7 +48,7 @@ public class EnemyMover : MonoBehaviour
 
         if(_isLookAtHouse)
         {
-            Vector3 rotaion = (_house.position - gameObject.transform.position).normalized;
+            Vector3 rotaion = (_building.position - gameObject.transform.position).normalized;
             Vector3 rotaionXZ = new Vector3(rotaion.x, 0f, rotaion.z);
 
             transform.rotation = Quaternion.LookRotation(rotaionXZ);
@@ -60,9 +60,9 @@ public class EnemyMover : MonoBehaviour
         }
     }
 
-    public void SetTarget(Transform house)
+    public void SetTarget(Transform building)
     {
-        _house = house;
+        _building = building;
     }
 
     public void StartDying()

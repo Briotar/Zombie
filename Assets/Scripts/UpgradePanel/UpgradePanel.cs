@@ -3,23 +3,21 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeArea : MonoBehaviour
+public class UpgradePanel : MonoBehaviour
 {
     [SerializeField] private PlayerCollector _playerCollector;
-    [SerializeField] private GameObject _effect;
     [SerializeField] private Image _fillImage;
     [SerializeField] private Image _frame;
-    [SerializeField] private int _currentUpgradeCost = 15;
+    [SerializeField] private GameObject _effect;
     [SerializeField] private float _delayBeforeUpgrade = 0.3f;
+    [SerializeField] private int _currentUpgradeCost = 15;
 
     private float _startAlphaColor = 0.7f;
     private float _coinsdecreaseSpeed = 0.05f;
+
     private bool _isCanUpgrade = false;
     private bool _isPlayerStay = false;
-    private int _upgradesCount = 1;
 
-    public event Action FirstUpgradePanel;
-    public event Action SecondUpgradePanel;
     public event Action<int> UpgradeCostChanged;
 
     private void OnEnable()
@@ -40,7 +38,7 @@ public class UpgradeArea : MonoBehaviour
 
     private void Start()
     {
-        UpgradeCostChanged.Invoke(_currentUpgradeCost);
+        //UpgradeCostChanged.Invoke(_currentUpgradeCost);
     }
 
     private void HasPlayerEnoughtCoins(int coins)
@@ -49,6 +47,11 @@ public class UpgradeArea : MonoBehaviour
         {
             _isCanUpgrade = true;
             _effect.SetActive(true);
+        }
+        else
+        {
+            _isCanUpgrade = false;
+            _effect.SetActive(false);
         }
     }
 
@@ -96,7 +99,7 @@ public class UpgradeArea : MonoBehaviour
             yield return new WaitForSeconds(_coinsdecreaseSpeed);
         }
 
-        if(coinsSpended == _currentUpgradeCost)
+        if (coinsSpended == _currentUpgradeCost)
         {
             _playerCollector.DecreaseCoin(coinsSpended);
             NextUpgrade();
@@ -117,19 +120,17 @@ public class UpgradeArea : MonoBehaviour
         _fillImage.fillAmount = 0f;
     }
 
-    private void NextUpgrade()
+    protected virtual void NextUpgrade()
+    {
+    }
+
+    protected void ChangeUpgradeCost()
     {
         _currentUpgradeCost *= 2;
 
-        if(_upgradesCount == 1)
-            FirstUpgradePanel.Invoke();
-        else 
-            SecondUpgradePanel.Invoke();
-
-        UpgradeCostChanged.Invoke(_currentUpgradeCost);
         _isCanUpgrade = false;
         _effect.SetActive(false);
 
-        _upgradesCount++;
+        //UpgradeCostChanged.Invoke(_currentUpgradeCost);
     }
 }
