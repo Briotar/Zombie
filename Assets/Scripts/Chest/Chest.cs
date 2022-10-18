@@ -1,12 +1,18 @@
 using UnityEngine;
+using System.Collections;
+using System;
 
 [RequireComponent(typeof(Animator))]
 public class Chest : MonoBehaviour
 {
     [SerializeField] private Transform _chestCenter;
     [SerializeField] private int _rewardsCount;
+    [SerializeField] private ParticleSystem _effect;
+    [SerializeField] private float _timeDelay = 0.1f;
 
     private Animator _animator;
+
+    public event Action Opened;
 
     private void Start()
     {
@@ -15,7 +21,16 @@ public class Chest : MonoBehaviour
 
     public void Open()
     {
+        Opened.Invoke();
         _animator.SetBool(AnimatorChestController.Params.IsChestOpened, true);
-        RewardsManager.Instance.SpawnReward(_chestCenter, 5);
+        StartCoroutine(EffectDelay());
+        RewardsManager.Instance.SpawnReward(_chestCenter, _rewardsCount);
+    }
+
+    private IEnumerator EffectDelay()
+    {
+        yield return new WaitForSeconds(_timeDelay);
+
+        _effect.Play();
     }
 }

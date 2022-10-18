@@ -9,6 +9,8 @@ public class AnimatorPlayerController : MonoBehaviour
         public const string IsStrafe = nameof(IsStrafe);
         public const string IsShooting = nameof(IsShooting);
         public const string IsRunning = nameof(IsRunning);
+        public const string IsShotgun = nameof(IsShotgun);
+        public const string IsRifle = nameof(IsRifle);
     }
 
     public static class States

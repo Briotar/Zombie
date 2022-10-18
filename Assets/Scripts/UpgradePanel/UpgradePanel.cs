@@ -38,7 +38,7 @@ public class UpgradePanel : MonoBehaviour
 
     private void Start()
     {
-        //UpgradeCostChanged.Invoke(_currentUpgradeCost);
+        UpgradeCostChanged.Invoke(_currentUpgradeCost);
     }
 
     private void HasPlayerEnoughtCoins(int coins)
@@ -101,8 +101,8 @@ public class UpgradePanel : MonoBehaviour
 
         if (coinsSpended == _currentUpgradeCost)
         {
-            _playerCollector.DecreaseCoin(coinsSpended);
             NextUpgrade();
+            _playerCollector.DecreaseCoin(coinsSpended);
         }
     }
 
@@ -131,6 +131,6 @@ public class UpgradePanel : MonoBehaviour
         _isCanUpgrade = false;
         _effect.SetActive(false);
 
-        //UpgradeCostChanged.Invoke(_currentUpgradeCost);
+        UpgradeCostChanged.Invoke(_currentUpgradeCost);
     }
 }

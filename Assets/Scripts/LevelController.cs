@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour
 {
     [SerializeField] private int _endGameTime = 3;
-    [SerializeField] private GameObject _levelCompletePanel;
     [SerializeField] private int _nextSceneNumber = 1;
 
     private WaveController _waveController;
@@ -38,6 +37,12 @@ public class LevelController : MonoBehaviour
     {
         yield return new WaitForSeconds(_endGameTime);
 
-        SceneManager.LoadScene(1);
+        Time.timeScale = 0f;
+    }
+
+    public void OnNextLevelButton()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(_nextSceneNumber);
     }
 }

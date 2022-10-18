@@ -1,18 +1,11 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerAnimationsController))]
 public class PlayerGun : Gun
 {
     [SerializeField] private float _damage;
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private Bullet[] _bullets;
-
-    private PlayerAnimationsController _animationsController;
-
-    private void Start()
-    {
-        _animationsController = GetComponent<PlayerAnimationsController>();
-    }
+    [SerializeField] private PlayerAnimationsController _animationsController;
 
     protected override void Shot()
     {
@@ -30,5 +23,4 @@ public class PlayerGun : Gun
             }
         }
     }
-
 }

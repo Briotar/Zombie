@@ -13,8 +13,6 @@ public class Building : MonoBehaviour
     {
         _currentHealth = _maxHealth;
         HealthChanged.Invoke(_currentHealth / _maxHealth);
-
-        Debug.Log(_currentHealth);
     }
 
     protected virtual void Destroy()

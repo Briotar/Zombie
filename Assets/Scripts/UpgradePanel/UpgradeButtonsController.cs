@@ -7,6 +7,7 @@ public class UpgradeButtonsController : MonoBehaviour
     [SerializeField] private Gun _playerGun;
     [SerializeField] private PlayerEffects _effect;
     [SerializeField] private float _secondsBeforeStop = 0.55f;
+    [SerializeField] private PlayerWeaponChooser _weaponChooser;
 
     private Animator[] _objectsOnPanel;
 
@@ -39,13 +40,25 @@ public class UpgradeButtonsController : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    public void OnIncreaseShootingSpeed()
+    private void OnButtonClick()
     {
         StartCoroutine(PlayButtonsAnimCoroutine(false));
 
         Time.timeScale = 1;
+        _effect.PlayUpgradeEffect();
+    }
+
+    public void OnIncreaseShootingSpeed()
+    {
+        OnButtonClick();
 
         _playerGun.IncreaseShootingSpeed();
-        _effect.PlayUpgradeEffect();
+    }
+
+    public void OnBuyNewWeapon()
+    {
+        OnButtonClick();
+
+        _weaponChooser.SetNewWeapon();
     }
 }
