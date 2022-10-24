@@ -6,6 +6,7 @@ public class PlayerGun : Gun
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private Bullet[] _bullets;
     [SerializeField] private PlayerAnimationsController _animationsController;
+    [SerializeField] private ParticleSystem _shotEffect;
 
     protected override void Shot()
     {
@@ -22,5 +23,13 @@ public class PlayerGun : Gun
                 break;
             }
         }
+
+        _shotEffect.Play();
+    }
+
+    public void SetShootPoint(Transform newShootPoint, ParticleSystem newShotEffect)
+    {
+        _shootPoint = newShootPoint;
+        _shotEffect = newShotEffect;
     }
 }

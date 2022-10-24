@@ -22,6 +22,11 @@ public class WaveView : MonoBehaviour
             StartNextWave(wave);
         };
 
+        _waveController.BossWave += (int wave, bool isBoss) =>
+        {
+            StartNextWave(wave, isBoss);
+        };
+
         _waveController.LastWave += () =>
         {
             StartLastWave();
@@ -40,6 +45,11 @@ public class WaveView : MonoBehaviour
             StartNextWave(wave);
         };
 
+        _waveController.BossWave -= (int wave, bool isBoss) =>
+        {
+            StartNextWave(wave, isBoss);
+        };
+
         _waveController.LastWave -= () =>
         {
             StartLastWave();
@@ -51,15 +61,19 @@ public class WaveView : MonoBehaviour
         };
     }
 
-    private void StartNextWave(int wave)
+    private void StartNextWave(int wave, bool isBoss = false)
     {
         _currentWave = wave;
 
         _allWavesText.text = $"{_currentWave}";
         _currentWaveText.text = $"INCOMING...";
-        _nextWaveNumber.text = $"WAVE {wave}";
-        _endWaveText.SetActive(true);
 
+        if(isBoss)
+            _nextWaveNumber.text = $"BOSS";
+        else
+            _nextWaveNumber.text = $"WAVE {_currentWave}";
+
+        _endWaveText.SetActive(true);
         StartCoroutine(SliderCoroutine());
     }
 
@@ -83,5 +97,12 @@ public class WaveView : MonoBehaviour
     private void StartLastWave()
     {
         _levelCompletePanel.SetActive(true);
+    }
+
+    public void ShowWaveNumber(int waveNumber)
+    {
+        _currentWave = waveNumber;
+        _allWavesText.text = $"{_currentWave}";
+        _currentWaveText.text = $"WAVE {_currentWave}";
     }
 }

@@ -5,6 +5,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private SpawnPointsList _spawnPointList;
     [SerializeField] private Enemy[] _enemies;
+    [SerializeField] private Enemy _boss;
 
     [SerializeField] private float _timeToSpawnEmemies = 3f;
     [SerializeField] private int _maxEnemiesOnSpawn = 4;
@@ -73,5 +74,13 @@ public class EnemySpawner : MonoBehaviour
         _maxEnemiesOnWave = maxEnemiesOnWave;
         _spawnedEnemiesCount = 0;
         _isCanSpawn = true;
+    }
+
+    public void StartBossWave()
+    {
+        Vector3 spawnPoint = _spawnPointList.GetSpawnPoint();
+
+        _boss.transform.position = spawnPoint;
+        _boss.gameObject.SetActive(true);
     }
 }

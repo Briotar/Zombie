@@ -11,11 +11,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _maxHealth;
     [SerializeField] private Canvas _canvas;
     [SerializeField] private Animator _animatorCanvas;
+    [SerializeField] private EnemyMover _mover;
 
     private float _minPlayerDamage = 25;
     private float _currentHealth;
     private Animator _animator;
-    private EnemyMover _mover;
     private Collider _collider;
     private EnemyEffects _effects;
 
@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         _collider = GetComponent<Collider>();
-        _mover = GetComponent<EnemyMover>();
 
         _animatorCanvas.enabled = false;
         _currentHealth = _maxHealth;

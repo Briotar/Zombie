@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class PlayerCollector : MonoBehaviour
 {
-    [SerializeField] private int _currentCountCoins = 0;
     [SerializeField] private ParticleSystem _collectEffect;
+
+    private int _currentCountCoins = 0;
 
     public event Action<int> CoinsCountChanged;
 
@@ -21,6 +22,8 @@ public class PlayerCollector : MonoBehaviour
 
             _currentCountCoins++;
             CoinsCountChanged.Invoke(_currentCountCoins);
+
+            ProgressSaver.Instance.SaveMoney(_currentCountCoins, 0);
         }
     }
 
@@ -28,5 +31,12 @@ public class PlayerCollector : MonoBehaviour
     {
         _currentCountCoins -= count;
         CoinsCountChanged.Invoke(_currentCountCoins);
+
+        ProgressSaver.Instance.SaveMoney(_currentCountCoins, 0);
+    }
+
+    public void SetMoneyCount(int count)
+    {
+        _currentCountCoins = count;
     }
 }

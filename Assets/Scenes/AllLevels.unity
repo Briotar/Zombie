@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 146208063}
   - component: {fileID: 146208062}
   - component: {fileID: 146208066}
+  - component: {fileID: 146208067}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -243,6 +244,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d1173da5489b7e4ba91098f2436e00a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _saver: {fileID: 146208067}
+--- !u!114 &146208067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146208061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852408891bfeb3a4aa3272bdebd5179a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1095884535
@@ -571,6 +585,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 194992233384760728, guid: bcd0003c85bb78048b4ddc560490377d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 194992234290309424, guid: bcd0003c85bb78048b4ddc560490377d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 194992234552905653, guid: bcd0003c85bb78048b4ddc560490377d, type: 3}
       propertyPath: m_text
       value: 1-2
@@ -688,6 +710,14 @@ PrefabInstance:
     - target: {fileID: 194992233384760728, guid: bcd0003c85bb78048b4ddc560490377d, type: 3}
       propertyPath: m_Name
       value: LevelButton (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 194992233384760728, guid: bcd0003c85bb78048b4ddc560490377d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 194992234290309424, guid: bcd0003c85bb78048b4ddc560490377d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 194992234552905653, guid: bcd0003c85bb78048b4ddc560490377d, type: 3}
       propertyPath: m_text
@@ -963,6 +993,10 @@ PrefabInstance:
     - target: {fileID: 194992233384760728, guid: bcd0003c85bb78048b4ddc560490377d, type: 3}
       propertyPath: m_Name
       value: LevelButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 194992233384760728, guid: bcd0003c85bb78048b4ddc560490377d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 194992234290309424, guid: bcd0003c85bb78048b4ddc560490377d, type: 3}
       propertyPath: m_IsActive

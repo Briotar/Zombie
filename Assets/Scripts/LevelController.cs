@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(WaveController))]
+[RequireComponent(typeof(ProgressSaver))]
 public class LevelController : MonoBehaviour
 {
     [SerializeField] private int _endGameTime = 3;
@@ -35,9 +36,18 @@ public class LevelController : MonoBehaviour
 
     private IEnumerator EndLevel()
     {
+        ProgressSaver.Instance.SaveLevel(_nextSceneNumber);
+        ProgressSaver.Instance.SaveWave(1);
+
         yield return new WaitForSeconds(_endGameTime);
 
         Time.timeScale = 0f;
+    }
+
+    public void OnMenuButton()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
 
     public void OnNextLevelButton()

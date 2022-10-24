@@ -1249,6 +1249,7 @@ MonoBehaviour:
   _maxHealth: 100
   _canvas: {fileID: 4258290546801514245}
   _animatorCanvas: {fileID: 1278084998}
+  _mover: {fileID: 4258290547250990733}
 --- !u!114 &4258290547250990735
 MonoBehaviour:
   m_ObjectHideFlags: 0

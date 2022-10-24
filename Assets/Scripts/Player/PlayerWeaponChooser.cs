@@ -21,6 +21,7 @@ public class PlayerWeaponChooser : MonoBehaviour
     public void SetSgotgun()
     {
         _isShotgun = true;
+        ProgressSaver.Instance.SaveWeapon("shotgun");
 
         _pistol.SetActive(false);
         _shotGun.SetActive(true);
@@ -31,10 +32,23 @@ public class PlayerWeaponChooser : MonoBehaviour
     public void SetRifle()
     {
         _isRifle = true;
+        ProgressSaver.Instance.SaveWeapon("rifle");
 
         _shotGun.SetActive(false);
         _rifle.SetActive(true);
 
         _animationsController.SetRifle();
+    }
+
+    public void SetCurrentWeapon(string weapon)
+    {
+        if(weapon == "shotgun")
+        {
+            SetSgotgun();
+        }
+        else if(weapon == "rifle")
+        {
+            SetRifle();
+        }
     }
 }
