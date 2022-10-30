@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class UpgradeAreaViewPlayer : UpgradeAreaView
 {
-    [SerializeField] private GameObject _firstUpgradePanel;
-    [SerializeField] private GameObject _secondUpgradePanel;
+    [SerializeField] private GameObject _upgradePanel;
 
     private UpgradePanelPlayer _upgradeAreaPlayer;
 
@@ -13,19 +12,14 @@ public class UpgradeAreaViewPlayer : UpgradeAreaView
 
         _upgradeAreaPlayer = GetComponent<UpgradePanelPlayer>();
 
-        _upgradeAreaPlayer.FirstUpgradePanel += () =>
+        _upgradeAreaPlayer.UpgadePurchased += () =>
         {
-            ShowUpgradePanel(_firstUpgradePanel);
-        };
-
-        _upgradeAreaPlayer.SecondUpgradePanel += () =>
-        {
-            ShowUpgradePanel(_secondUpgradePanel);
+            ShowUpgradePanel();
         };
     }
 
-    private void ShowUpgradePanel(GameObject panel)
+    private void ShowUpgradePanel()
     {
-        panel.SetActive(true);
+        _upgradePanel.SetActive(true);
     }
 }

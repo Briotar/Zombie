@@ -12,10 +12,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Canvas _canvas;
     [SerializeField] private Animator _animatorCanvas;
     [SerializeField] private EnemyMover _mover;
+    [SerializeField] private Animator _animator;
 
     private float _minPlayerDamage = 25;
     private float _currentHealth;
-    private Animator _animator;
     private Collider _collider;
     private EnemyEffects _effects;
 
@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
         _effects = GetComponent<EnemyEffects>();
     }
 

@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
     private int _spawnedEnemiesCount = 0;
     private float _currentTime;
     private bool _isCanSpawn = true;
+    private bool _isBossWave = false;
 
     private int _spawnCounter = 0;
 
@@ -28,7 +29,11 @@ public class EnemySpawner : MonoBehaviour
         if(_isCanSpawn)
             if (_currentTime >= _timeToSpawnEmemies)
             {
-                SpawnEnemies();
+                if (_isBossWave)
+                    StartBossWave();
+                else
+                    SpawnEnemies();
+
                 _currentTime = 0;
             }
             else
@@ -69,6 +74,16 @@ public class EnemySpawner : MonoBehaviour
         _spawnCounter++;
     }
 
+    private void StartBossWave()
+    {
+        _isCanSpawn = false;
+
+        Vector3 spawnPoint = _spawnPointList.GetSpawnPoint();
+
+        _boss.transform.position = spawnPoint;
+        _boss.gameObject.SetActive(true);
+    }
+
     public void StartWave(int maxEnemiesOnWave)
     {
         _maxEnemiesOnWave = maxEnemiesOnWave;
@@ -76,11 +91,9 @@ public class EnemySpawner : MonoBehaviour
         _isCanSpawn = true;
     }
 
-    public void StartBossWave()
+    public void SetBossWave()
     {
-        Vector3 spawnPoint = _spawnPointList.GetSpawnPoint();
-
-        _boss.transform.position = spawnPoint;
-        _boss.gameObject.SetActive(true);
+        _isBossWave = true;
+        _isCanSpawn = true;
     }
 }

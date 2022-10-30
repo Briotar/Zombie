@@ -13,14 +13,14 @@ public class ChestView : MonoBehaviour
     {
         _chests = GetComponentsInChildren<Chest>();
         _maxCount = _chests.Length;
-        _currentCount = _maxCount;
+        _currentCount = 0;
         ShowChestCount();
 
         for (int i = 0; i < _chests.Length; i++)
         {
             _chests[i].Opened += () =>
             {
-                DecreaseChestCount();
+                IncreaseChestCount();
             };
         }
     }
@@ -31,14 +31,14 @@ public class ChestView : MonoBehaviour
         {
             _chests[i].Opened -= () =>
             {
-                DecreaseChestCount();
+                IncreaseChestCount();
             };
         }
     }
 
-    private void DecreaseChestCount()
+    private void IncreaseChestCount()
     {
-        _currentCount--;
+        _currentCount++;
         ShowChestCount();
     }
 

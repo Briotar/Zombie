@@ -11,9 +11,10 @@ public class LevelLoader : MonoBehaviour
 
     private void Start()
     {
-        //PlayerPrefs.SetInt("_currentWaveOnlevel", 1);
-        //PlayerPrefs.SetString("_currentWeapon", "shotgun");
-        //PlayerPrefs.Save();
+        PlayerPrefs.SetInt("_currentWaveOnlevel", 1);
+        PlayerPrefs.SetInt("_whiteMoney", 9999);
+        PlayerPrefs.SetInt("_redMoney", 9999);
+        PlayerPrefs.Save();
 
         LoadWave();
         LoadMoney();
@@ -38,15 +39,24 @@ public class LevelLoader : MonoBehaviour
     private void LoadMoney()
     {
         int whiteMoney = PlayerPrefs.GetInt("_whiteMoney" , _defaultValue);
-        //int redMoney = PlayerPrefs.GetInt("_redMoney", _defaultValue);
+        int redMoney = PlayerPrefs.GetInt("_redMoney", _defaultValue);
         
         if(whiteMoney == _defaultValue)
         {
-            _playerCollector.SetMoneyCount(0);
+            _playerCollector.SetWhiteMoneyCount(0);
         }
         else
         {
-            _playerCollector.SetMoneyCount(whiteMoney);
+            _playerCollector.SetWhiteMoneyCount(whiteMoney);
+        }
+
+        if (redMoney == _defaultValue)
+        {
+            _playerCollector.SetRedMoneyCount(0);
+        }
+        else
+        {
+            _playerCollector.SetRedMoneyCount(redMoney);
         }
     }
 

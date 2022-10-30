@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Enemy))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMover : MonoBehaviour
 {

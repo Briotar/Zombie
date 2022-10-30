@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class UpgradePanelBuildings : UpgradePanel
 {
-    [SerializeField] private Wall _wall;
+    [SerializeField] private DefensiveBuilding _building;
 
     protected override void NextUpgrade()
     {
         gameObject.SetActive(false);
-        _wall.Build();
+        _building.Build();
     }
 }

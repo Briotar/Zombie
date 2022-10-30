@@ -11,9 +11,11 @@ public class UpgradePanel : MonoBehaviour
     [SerializeField] private GameObject _effect;
     [SerializeField] private float _delayBeforeUpgrade = 0.3f;
     [SerializeField] private int _currentUpgradeCost = 15;
+    [SerializeField] private bool _isNeedRedCoin = false;
+    [SerializeField] private float _timeToUpgrade = 1f;
 
     private float _startAlphaColor = 0.7f;
-    private float _coinsdecreaseSpeed = 0.05f;
+    private float _coinsDecreaseSpeed = 0.05f;
 
     private bool _isCanUpgrade = false;
     private bool _isPlayerStay = false;
@@ -22,18 +24,38 @@ public class UpgradePanel : MonoBehaviour
 
     private void OnEnable()
     {
-        _playerCollector.CoinsCountChanged += (int coins) =>
+        if(_isNeedRedCoin)
         {
-            HasPlayerEnoughtCoins(coins);
-        };
+            _playerCollector.RedCoinsCountChanged += (int coins) =>
+            {
+                HasPlayerEnoughtCoins(coins);
+            };
+        }
+        else
+        {
+            _playerCollector.WhiteCoinsCountChanged += (int coins) =>
+            {
+                HasPlayerEnoughtCoins(coins);
+            };
+        }
     }
 
     private void OnDisable()
     {
-        _playerCollector.CoinsCountChanged -= (int coins) =>
+        if (_isNeedRedCoin)
         {
-            HasPlayerEnoughtCoins(coins);
-        };
+            _playerCollector.RedCoinsCountChanged += (int coins) =>
+            {
+                HasPlayerEnoughtCoins(coins);
+            };
+        }
+        else
+        {
+            _playerCollector.WhiteCoinsCountChanged += (int coins) =>
+            {
+                HasPlayerEnoughtCoins(coins);
+            };
+        }
     }
 
     private void Start()
@@ -84,37 +106,24 @@ public class UpgradePanel : MonoBehaviour
     {
         yield return new WaitForSeconds(_delayBeforeUpgrade);
 
-        StartCoroutine(UpgradeCoroutine());
         StartCoroutine(FillImageCoroutine());
-    }
-
-    private IEnumerator UpgradeCoroutine()
-    {
-        var coinsSpended = 0;
-
-        while (coinsSpended != _currentUpgradeCost && _isPlayerStay)
-        {
-            coinsSpended++;
-
-            yield return new WaitForSeconds(_coinsdecreaseSpeed);
-        }
-
-        if (coinsSpended == _currentUpgradeCost)
-        {
-            NextUpgrade();
-            _playerCollector.DecreaseCoin(coinsSpended);
-        }
     }
 
     private IEnumerator FillImageCoroutine()
     {
-        var time = _currentUpgradeCost * _coinsdecreaseSpeed;
+        var time = _timeToUpgrade;
 
         while (_fillImage.fillAmount != 1f && _isPlayerStay)
         {
             _fillImage.fillAmount += Time.deltaTime / time;
 
             yield return new WaitForFixedUpdate();
+        }
+
+        if(_fillImage.fillAmount >= 1)
+        {
+            NextUpgrade();
+            _playerCollector.DecreaseWhiteCoin(_currentUpgradeCost);
         }
 
         _fillImage.fillAmount = 0f;
@@ -127,6 +136,7 @@ public class UpgradePanel : MonoBehaviour
     protected void ChangeUpgradeCost()
     {
         _currentUpgradeCost *= 2;
+        _coinsDecreaseSpeed /= 2f;
 
         _isCanUpgrade = false;
         _effect.SetActive(false);

@@ -6,6 +6,7 @@ using UnityEngine;
 public class WaveController : MonoBehaviour
 {
     [SerializeField] private int _maxEnemiesOnWave = 4;
+    [SerializeField] private int _maxBossOnLastWave = 1;
     [SerializeField] private int _increaseCount = 1;
     [SerializeField] private int _maxWaves = 3;
 
@@ -82,8 +83,9 @@ public class WaveController : MonoBehaviour
     {
         if(_isBoss)
         {
-            EnemiesCountChanged.Invoke(1);
-            _enemySpawner.StartBossWave();
+            _maxEnemiesOnWave = _maxBossOnLastWave;
+            EnemiesCountChanged.Invoke((float)_currentDeadEnemies / _maxEnemiesOnWave);
+            _enemySpawner.SetBossWave();
         }
         else
         {
@@ -103,7 +105,7 @@ public class WaveController : MonoBehaviour
         }
         else
         {
-        _maxEnemiesOnWave += _increaseCount * (waveNumber - 1);
+            _maxEnemiesOnWave += _increaseCount * (waveNumber - 1);
         }
 
         StartNextWave();

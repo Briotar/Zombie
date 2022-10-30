@@ -5,38 +5,64 @@ public class PlayerCollector : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _collectEffect;
 
-    private int _currentCountCoins = 0;
+    private int _currentWhiteCountCoins = 0;
+    private int _currentRedCountCoins = 0;
 
-    public event Action<int> CoinsCountChanged;
+    public event Action<int> WhiteCoinsCountChanged;
+    public event Action<int> RedCoinsCountChanged;
 
     private void Start()
     {
-        CoinsCountChanged.Invoke(_currentCountCoins);
+        WhiteCoinsCountChanged.Invoke(_currentWhiteCountCoins);
+        RedCoinsCountChanged.Invoke(_currentRedCountCoins);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Reward>())
+        Reward reward;
+
+        if (reward = other.GetComponent<Reward>())
         {
             _collectEffect.Play();
 
-            _currentCountCoins++;
-            CoinsCountChanged.Invoke(_currentCountCoins);
+            if(reward.IsRedCoin)
+            {
+                _currentRedCountCoins++;
+                RedCoinsCountChanged.Invoke(_currentRedCountCoins);
+            }
+            else
+            {
+                _currentWhiteCountCoins++;
+                WhiteCoinsCountChanged.Invoke(_currentWhiteCountCoins);
+            }
 
-            ProgressSaver.Instance.SaveMoney(_currentCountCoins, 0);
+            ProgressSaver.Instance.SaveMoney(_currentWhiteCountCoins, _currentRedCountCoins);
         }
     }
 
-    public void DecreaseCoin(int count)
+    public void DecreaseWhiteCoin(int count)
     {
-        _currentCountCoins -= count;
-        CoinsCountChanged.Invoke(_currentCountCoins);
+        _currentWhiteCountCoins -= count;
+        WhiteCoinsCountChanged.Invoke(_currentWhiteCountCoins);
 
-        ProgressSaver.Instance.SaveMoney(_currentCountCoins, 0);
+        ProgressSaver.Instance.SaveMoney(_currentWhiteCountCoins, 0);
     }
 
-    public void SetMoneyCount(int count)
+    public void DecreaseRedCoin(int count)
     {
-        _currentCountCoins = count;
+        _currentRedCountCoins -= count;
+        RedCoinsCountChanged.Invoke(_currentRedCountCoins);
+
+        ProgressSaver.Instance.SaveMoney(_currentWhiteCountCoins, 0);
+    }
+
+    public void SetWhiteMoneyCount(int count)
+    {
+        _currentWhiteCountCoins = count;
+    }
+
+    public void SetRedMoneyCount(int count)
+    {
+        _currentRedCountCoins = count;
     }
 }

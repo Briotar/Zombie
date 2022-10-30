@@ -9,6 +9,7 @@ public class Reward : MonoBehaviour
     [SerializeField] private float _forse = 0.23f;
     [SerializeField] private float _collectDistance = 3f;
     [SerializeField] private float _collectSpeed = 1.8f;
+    [SerializeField] private bool _isRedCoin = false;
 
     private Rigidbody _rigidbody;
     private Collider _collider;
@@ -16,6 +17,8 @@ public class Reward : MonoBehaviour
 
     private bool _canCollect = false;
     private bool _isNeedToAddForse = true;
+
+    public bool IsRedCoin => _isRedCoin;
 
     private void OnEnable()
     {

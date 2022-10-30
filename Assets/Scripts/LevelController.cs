@@ -55,4 +55,10 @@ public class LevelController : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(_nextSceneNumber);
     }
+
+    public void OnRetryButton()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene((_nextSceneNumber - 1));
+    }
 }

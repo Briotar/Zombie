@@ -1250,6 +1250,7 @@ MonoBehaviour:
   _canvas: {fileID: 4258290546801514245}
   _animatorCanvas: {fileID: 1278084998}
   _mover: {fileID: 4258290547250990733}
+  _animator: {fileID: 4258290547250990729}
 --- !u!114 &4258290547250990735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1309,6 +1310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 2
+  _animator: {fileID: 4258290547250990729}
 --- !u!195 &543450652467304773
 NavMeshAgent:
   m_ObjectHideFlags: 0
