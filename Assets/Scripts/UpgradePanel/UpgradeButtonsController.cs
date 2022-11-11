@@ -4,10 +4,11 @@ using UnityEngine;
 public class UpgradeButtonsController : MonoBehaviour
 {
     [SerializeField] private GameObject _upgradePanel;
-    [SerializeField] private Gun _playerGun;
+    [SerializeField] private PlayerGun _playerGun;
     [SerializeField] private PlayerEffects _effect;
     [SerializeField] private float _secondsBeforeStop = 0.55f;
     [SerializeField] private PlayerWeaponChooser _weaponChooser;
+    [SerializeField] private GameObject _drone;
 
     private Animator[] _objectsOnPanel;
 
@@ -55,10 +56,24 @@ public class UpgradeButtonsController : MonoBehaviour
         _playerGun.IncreaseShootingSpeed();
     }
 
+    public void OnIncreaseDamage()
+    {
+        OnButtonClick();
+
+        _playerGun.IncreaseDamage();
+    }
+
     public void OnBuyNewWeapon()
     {
         OnButtonClick();
 
         _weaponChooser.SetNewWeapon();
+    }
+
+    public void OnBuyDrone()
+    {
+        OnButtonClick();
+
+        _drone.SetActive(true);
     }
 }

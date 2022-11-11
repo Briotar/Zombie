@@ -13,9 +13,9 @@ public class UpgradePanel : MonoBehaviour
     [SerializeField] private int _currentUpgradeCost = 15;
     [SerializeField] private bool _isNeedRedCoin = false;
     [SerializeField] private float _timeToUpgrade = 1f;
+    [SerializeField] private bool _isRedCoins;
 
     private float _startAlphaColor = 0.7f;
-    private float _coinsDecreaseSpeed = 0.05f;
 
     private bool _isCanUpgrade = false;
     private bool _isPlayerStay = false;
@@ -30,6 +30,8 @@ public class UpgradePanel : MonoBehaviour
             {
                 HasPlayerEnoughtCoins(coins);
             };
+
+            _currentUpgradeCost = SetCost(false);
         }
         else
         {
@@ -37,6 +39,8 @@ public class UpgradePanel : MonoBehaviour
             {
                 HasPlayerEnoughtCoins(coins);
             };
+
+            _currentUpgradeCost = SetCost(true);
         }
     }
 
@@ -61,6 +65,26 @@ public class UpgradePanel : MonoBehaviour
     private void Start()
     {
         UpgradeCostChanged.Invoke(_currentUpgradeCost);
+    }
+
+    protected virtual int SetCost(bool isWhiteCoin = false)
+    {
+        if(isWhiteCoin)
+        {
+            var cost = PlayerPrefs.GetInt("_upgradeWhiteCoinsCost", -1);
+
+            if (cost != -1)
+                return cost;
+        }
+        else
+        {
+            var cost = PlayerPrefs.GetInt("_upgradeRedCoinsCost", -1);
+
+            if (cost != -1)
+                return cost;
+        }
+
+        return _currentUpgradeCost;
     }
 
     private void HasPlayerEnoughtCoins(int coins)
@@ -122,8 +146,13 @@ public class UpgradePanel : MonoBehaviour
 
         if(_fillImage.fillAmount >= 1)
         {
+            var cost = _currentUpgradeCost;
             NextUpgrade();
-            _playerCollector.DecreaseWhiteCoin(_currentUpgradeCost);
+
+            if (_isNeedRedCoin)
+                _playerCollector.DecreaseRedCoin(cost);
+            else
+                _playerCollector.DecreaseWhiteCoin(cost);
         }
 
         _fillImage.fillAmount = 0f;
@@ -136,11 +165,15 @@ public class UpgradePanel : MonoBehaviour
     protected void ChangeUpgradeCost()
     {
         _currentUpgradeCost *= 2;
-        _coinsDecreaseSpeed /= 2f;
 
         _isCanUpgrade = false;
         _effect.SetActive(false);
 
         UpgradeCostChanged.Invoke(_currentUpgradeCost);
+
+        if (_isRedCoins)
+            ProgressSaver.Instance.SaveUpgradeCostRedCoins(_currentUpgradeCost);
+        else
+            ProgressSaver.Instance.SaveUpgradeCostWhiteCoins(_currentUpgradeCost);
     }
 }

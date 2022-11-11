@@ -9,7 +9,9 @@ public class ProgressSaver : MonoBehaviour
     private string _currentWeapon = "pistol";
     private string _currentDrone = "none";
     private int _damageIncrease = 0;
-    private int _shootingSpeedIncrease = 0;
+    private float _shootingSpeedIncrease = 0;
+    private int _upgradeWhiteCoinsCost;
+    private int _upgradeRedCoinsCost;
 
     public static ProgressSaver Instance;
 
@@ -20,7 +22,9 @@ public class ProgressSaver : MonoBehaviour
 
     public void SaveLevel(int level)
     {
-        _currentLevel = level;
+        if(_currentLevel < level)
+            _currentLevel = level;
+
         PlayerPrefs.SetInt("_currentLevel", _currentLevel);
         PlayerPrefs.Save();
     }
@@ -41,13 +45,19 @@ public class ProgressSaver : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void SaveWeaponUpgrade(int damageIncrease, int shootingSpeedIncrease)
+    public void SaveDamage(int damageIncrease)
     {
         _damageIncrease = damageIncrease;
-        _shootingSpeedIncrease = shootingSpeedIncrease;
 
         PlayerPrefs.SetInt("_damageIncrease", _damageIncrease);
-        PlayerPrefs.SetInt("_shootingSpeedIncrease", _shootingSpeedIncrease);
+        PlayerPrefs.Save();
+    }
+
+    public void SaveShootingSpeed(float increase)
+    {
+        _shootingSpeedIncrease = increase;
+
+        PlayerPrefs.SetFloat("_shootingSpeedIncrease", _shootingSpeedIncrease);
         PlayerPrefs.Save();
     }
 
@@ -66,6 +76,22 @@ public class ProgressSaver : MonoBehaviour
         _currentDrone = "drone";
 
         PlayerPrefs.SetString("_currentDrone", _currentDrone);
+        PlayerPrefs.Save();
+    }
+
+    public void SaveUpgradeCostWhiteCoins(int count)
+    {
+        _upgradeWhiteCoinsCost = count;
+
+        PlayerPrefs.SetInt("_upgradeWhiteCoinsCost", _upgradeWhiteCoinsCost);
+        PlayerPrefs.Save();
+    }
+
+    public void SaveUpgradeCostRedCoins(int count)
+    {
+        _upgradeRedCoinsCost = count;
+
+        PlayerPrefs.SetInt("_upgradeRedCoinsCost", _upgradeRedCoinsCost);
         PlayerPrefs.Save();
     }
 }

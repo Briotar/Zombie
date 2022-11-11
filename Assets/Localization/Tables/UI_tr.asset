@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_tr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: tr
+  m_SharedData: {fileID: 11400000, guid: 69ea3aa199174a94eae967ed427fbfaf, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 472210751815942441
+  m_TableData:
+  - m_Id: 102791450624
+    m_Localized: "DALGA TEM\u0130ZLEND\u0130"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2085610917888
+    m_Localized: "\u0130\xC7ER\u0130 GEL\u0130YORUM."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2336795201536
+    m_Localized: ATLAMAK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2812743847936
+    m_Localized: DALGA {WaveView.CurrentWaveString}
+    m_Metadata:
+      m_Items:
+      - rid: 472210751815942441
+  - m_Id: 4269526290432
+    m_Localized: "B\u0130R Y\xDCKSELTME SE\xC7\u0130N"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4452238561280
+    m_Localized: Hasar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4594014425088
+    m_Localized: "\xC7ekim H\u0131z\u0131"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4954443550720
+    m_Localized: "Ta\u015F\u0131d\u0131\u011F\u0131n\u0131z herhangi bir el silah\u0131n\u0131n
+      hasar\u0131n\u0131 art\u0131r\u0131n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5258530590720
+    m_Localized: "Ta\u015F\u0131d\u0131\u011F\u0131n\u0131z herhangi bir el silah\u0131n\u0131n
+      at\u0131\u015F h\u0131z\u0131n\u0131 art\u0131r\u0131n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31799285190656
+    m_Localized: Drone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32132778496000
+    m_Localized: "En uzak d\xFC\u015Fmana sald\u0131ran drone."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32421598269440
+    m_Localized: Yeni silah
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32579371208704
+    m_Localized: "Kahraman\u0131n\u0131z i\xE7in yeni bir silah t\xFCr\xFC."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33735774375936
+    m_Localized: "SEV\u0130YE TAMAMLANDI"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33961994162176
+    m_Localized: "MEN\xDC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34233462099968
+    m_Localized: "SONRAK\u0130 "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34546298458112
+    m_Localized: "OYUN B\u0130TT\u0130!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34736849883136
+    m_Localized: DENEME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35277327896576
+    m_Localized: "Sat\u0131n al\u0131nd\u0131!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39396348334080
+    m_Localized: "Y\xDCKSELTME"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39744215519232
+    m_Localized: "YEN\u0130 S\u0130LAH sat\u0131n AL"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39994284118016
+    m_Localized: "TARET \u0130N\u015EA ET"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40093605236736
+    m_Localized: "DUVAR \u0130N\u015EA ET"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 472210751815942441
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 001099e48e020000

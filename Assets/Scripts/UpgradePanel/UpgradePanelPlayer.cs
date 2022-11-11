@@ -6,8 +6,8 @@ public class UpgradePanelPlayer : UpgradePanel
 
     protected override void NextUpgrade()
     {
-        ChangeUpgradeCost();
-
         UpgadePurchased.Invoke();
+
+        ChangeUpgradeCost();
     }
 }

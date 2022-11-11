@@ -5,7 +5,7 @@ public class AttackPointsList : MonoBehaviour
 {
     private AttackPoint[] _allAttackPoints;
 
-    private void Start()
+    private void OnEnable()
     {
         _allAttackPoints = GetComponentsInChildren<AttackPoint>();
     }
@@ -42,5 +42,9 @@ public class AttackPointsList : MonoBehaviour
     public void AddPointsToList(AttackPoint[] newPoints)
     {
         _allAttackPoints = _allAttackPoints.Concat(newPoints).ToArray();
+    }
+
+    public void RemovePointsFromList(AttackPoint[] newPoints)
+    {
     }
 }

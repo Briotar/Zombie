@@ -42,4 +42,9 @@ public class EnemyAttacker : MonoBehaviour
     {
         _building.Applydamage(_damage);
     }
+
+    public void StopAttack()
+    {
+        _animator.SetBool(AnimatorEnemyController.Params.IsAttacking, false);
+    }
 }

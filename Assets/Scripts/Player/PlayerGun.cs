@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerGun : Gun
 {
     [SerializeField] private float _damage;
+    [SerializeField] private float _damageIncrease;
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private Bullet[] _bullets;
     [SerializeField] private PlayerAnimationsController _animationsController;
@@ -31,5 +32,17 @@ public class PlayerGun : Gun
     {
         _shootPoint = newShootPoint;
         _shotEffect = newShotEffect;
+    }
+
+    public void IncreaseDamage()
+    {
+        _damage += _damageIncrease;
+
+        ProgressSaver.Instance.SaveDamage((int)_damage);
+    }
+
+    public void LoadDamageUpgrade(int damage)
+    {
+        _damage = damage;
     }
 }

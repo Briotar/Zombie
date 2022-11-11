@@ -53,7 +53,7 @@ public class PlayerCollector : MonoBehaviour
         _currentRedCountCoins -= count;
         RedCoinsCountChanged.Invoke(_currentRedCountCoins);
 
-        ProgressSaver.Instance.SaveMoney(_currentWhiteCountCoins, 0);
+        ProgressSaver.Instance.SaveMoney(0, _currentRedCountCoins);
     }
 
     public void SetWhiteMoneyCount(int count)

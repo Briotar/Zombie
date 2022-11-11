@@ -8,6 +8,7 @@ public class Building : MonoBehaviour
     private float _currentHealth;
 
     public event Action<float> HealthChanged;
+    public event Action Destroyed;
 
     protected virtual void Start()
     {
@@ -28,6 +29,7 @@ public class Building : MonoBehaviour
         if (_currentHealth <= 0)
         {
             Destroy();
+            Destroyed.Invoke();
         }
     }
 }

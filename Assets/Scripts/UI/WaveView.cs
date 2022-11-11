@@ -13,10 +13,14 @@ public class WaveView : MonoBehaviour
     [SerializeField] private GameObject _levelCompletePanel;
     [SerializeField] private TMP_Text _nextWaveNumber;
 
-    private int _currentWave;
+    private int _currentWave = 1;
+
+    public string CurrentWaveString;
 
     private void OnEnable()
     {
+        CurrentWaveString = _currentWave.ToString();
+
         _waveController.NextWave += (int wave) =>
         {
             StartNextWave(wave);
@@ -64,14 +68,9 @@ public class WaveView : MonoBehaviour
     private void StartNextWave(int wave, bool isBoss = false)
     {
         _currentWave = wave;
+        CurrentWaveString = _currentWave.ToString();
 
-        _allWavesText.text = $"{_currentWave}";
-        _currentWaveText.text = $"INCOMING...";
-
-        if(isBoss)
-            _nextWaveNumber.text = $"BOSS";
-        else
-            _nextWaveNumber.text = $"WAVE {_currentWave}";
+        UpdateWaveNumber();
 
         _endWaveText.SetActive(true);
         StartCoroutine(SliderCoroutine());
@@ -90,8 +89,6 @@ public class WaveView : MonoBehaviour
 
             _slider.value -= Time.deltaTime / 10f;
         }
-
-        _currentWaveText.text = $"WAVE {_currentWave}";
     }
 
     private void StartLastWave()
@@ -99,10 +96,17 @@ public class WaveView : MonoBehaviour
         _levelCompletePanel.SetActive(true);
     }
 
+    private void UpdateWaveNumber()
+    {
+        _allWavesText.text = $"{_currentWave}";
+        _currentWaveText.gameObject.SetActive(false);
+        _currentWaveText.gameObject.SetActive(true);
+    }
+
     public void ShowWaveNumber(int waveNumber)
     {
         _currentWave = waveNumber;
-        _allWavesText.text = $"{_currentWave}";
-        _currentWaveText.text = $"WAVE {_currentWave}";
+        CurrentWaveString = _currentWave.ToString();
+        UpdateWaveNumber();
     }
 }

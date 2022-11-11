@@ -85,4 +85,11 @@ public class EnemyMover : MonoBehaviour
     {
         _rigidbody.velocity = new Vector3(0f, -0.5f, 0f);
     }
+
+    public void ChangeAttackPoint()
+    {
+        _isLookAtHouse = false;
+        _agent.enabled = true;
+        _agent.destination = _attackPointsList.GetAttackPoint(_enemy);
+    }
 }

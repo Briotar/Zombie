@@ -574,6 +574,7 @@ MonoBehaviour:
   _animatorCanvas: {fileID: 2532709951384135194}
   _mover: {fileID: 1746696234774277905}
   _animator: {fileID: 2599274207505966114}
+  _isBoss: 0
 --- !u!114 &1746696234774277907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1676,6 +1677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 1746696234774277904}
+  _enemyAttacker: {fileID: 6859166542609949469}
 --- !u!1 &3061344830924934505
 GameObject:
   m_ObjectHideFlags: 0
