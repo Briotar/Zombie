@@ -9,6 +9,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private int _rewardsCount;
     [SerializeField] private ParticleSystem _effect;
     [SerializeField] private float _timeDelay = 0.1f;
+    [SerializeField] private GameObject _coinEffect;
 
     private Animator _animator;
 
@@ -22,7 +23,10 @@ public class Chest : MonoBehaviour
     public void Open()
     {
         Opened.Invoke();
+
+        _coinEffect.SetActive(false);
         _animator.SetBool(AnimatorChestController.Params.IsChestOpened, true);
+
         StartCoroutine(EffectDelay());
         RewardsManager.Instance.SpawnReward(_chestCenter, _rewardsCount);
     }

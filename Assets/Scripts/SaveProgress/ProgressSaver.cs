@@ -61,13 +61,19 @@ public class ProgressSaver : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void SaveMoney(int whiteMoney, int redMoney)
+    public void SaveRedMoney(int redMoney)
     {
-        _whiteMoney = whiteMoney;
         _redMoney = redMoney;
 
-        PlayerPrefs.SetInt("_whiteMoney", _whiteMoney);
         PlayerPrefs.SetInt("_redMoney", _redMoney);
+        PlayerPrefs.Save();
+    }
+
+    public void SaveWhiteMoney(int whiteMoney)
+    {
+        _whiteMoney = whiteMoney;
+
+        PlayerPrefs.SetInt("_whiteMoney", _whiteMoney);
         PlayerPrefs.Save();
     }
 

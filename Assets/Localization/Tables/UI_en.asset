@@ -112,6 +112,18 @@ MonoBehaviour:
     m_Localized: BUILD WALL
     m_Metadata:
       m_Items: []
+  - m_Id: 2355641735254016
+    m_Localized: VIDEO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2553933886722048
+    m_Localized: YOU HAVE PASSED THE GAME!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2586942505553920
+    m_Localized: SHOOSE LEVEL
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

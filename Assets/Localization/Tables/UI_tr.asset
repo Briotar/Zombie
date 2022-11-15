@@ -114,6 +114,18 @@ MonoBehaviour:
     m_Localized: "DUVAR \u0130N\u015EA ET"
     m_Metadata:
       m_Items: []
+  - m_Id: 2355641735254016
+    m_Localized: "V\u0130DEO "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2553933886722048
+    m_Localized: "OYUNU GE\xC7T\u0130N!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2586942505553920
+    m_Localized: "SEV\u0130YE SE\xC7"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

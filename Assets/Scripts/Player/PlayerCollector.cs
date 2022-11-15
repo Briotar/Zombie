@@ -36,7 +36,8 @@ public class PlayerCollector : MonoBehaviour
                 WhiteCoinsCountChanged.Invoke(_currentWhiteCountCoins);
             }
 
-            ProgressSaver.Instance.SaveMoney(_currentWhiteCountCoins, _currentRedCountCoins);
+            ProgressSaver.Instance.SaveWhiteMoney(_currentWhiteCountCoins);
+            ProgressSaver.Instance.SaveRedMoney(_currentRedCountCoins);
         }
     }
 
@@ -45,7 +46,7 @@ public class PlayerCollector : MonoBehaviour
         _currentWhiteCountCoins -= count;
         WhiteCoinsCountChanged.Invoke(_currentWhiteCountCoins);
 
-        ProgressSaver.Instance.SaveMoney(_currentWhiteCountCoins, 0);
+        ProgressSaver.Instance.SaveWhiteMoney(_currentWhiteCountCoins);
     }
 
     public void DecreaseRedCoin(int count)
@@ -53,16 +54,26 @@ public class PlayerCollector : MonoBehaviour
         _currentRedCountCoins -= count;
         RedCoinsCountChanged.Invoke(_currentRedCountCoins);
 
-        ProgressSaver.Instance.SaveMoney(0, _currentRedCountCoins);
+        ProgressSaver.Instance.SaveRedMoney(_currentRedCountCoins);
     }
 
     public void SetWhiteMoneyCount(int count)
     {
         _currentWhiteCountCoins = count;
+        WhiteCoinsCountChanged.Invoke(_currentWhiteCountCoins);
     }
 
     public void SetRedMoneyCount(int count)
     {
         _currentRedCountCoins = count;
+        RedCoinsCountChanged.Invoke(_currentRedCountCoins);
+    }
+
+    public void IncreaseWhiteCoins(int count)
+    {
+        _currentWhiteCountCoins += count;
+        WhiteCoinsCountChanged.Invoke(_currentWhiteCountCoins);
+
+        ProgressSaver.Instance.SaveWhiteMoney(_currentWhiteCountCoins);
     }
 }
