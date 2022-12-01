@@ -18,7 +18,7 @@ public class ChestView : MonoBehaviour
 
         for (int i = 0; i < _chests.Length; i++)
         {
-            _chests[i].Opened += () =>
+            _chests[i].Opened += (chest) =>
             {
                 IncreaseChestCount();
             };
@@ -29,7 +29,7 @@ public class ChestView : MonoBehaviour
     {
         for (int i = 0; i < _chests.Length; i++)
         {
-            _chests[i].Opened -= () =>
+            _chests[i].Opened -= (chest) =>
             {
                 IncreaseChestCount();
             };

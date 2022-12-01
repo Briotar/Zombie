@@ -12,6 +12,7 @@ public class ProgressSaver : MonoBehaviour
     private float _shootingSpeedIncrease = 0;
     private int _upgradeWhiteCoinsCost;
     private int _upgradeRedCoinsCost;
+    private int _chestCoinsCount = 5;
 
     public static ProgressSaver Instance;
 
@@ -99,5 +100,18 @@ public class ProgressSaver : MonoBehaviour
 
         PlayerPrefs.SetInt("_upgradeRedCoinsCost", _upgradeRedCoinsCost);
         PlayerPrefs.Save();
+    }
+
+    public void SaveChestCoins(int count)
+    {
+        int coinsCount =  PlayerPrefs.GetInt("_chestCoinCount", -1);
+
+        if (coinsCount > 0)
+            _chestCoinsCount = coinsCount;
+        else
+            _chestCoinsCount = 5;
+
+        _chestCoinsCount += count;
+        PlayerPrefs.SetInt("_chestCoinCount", _chestCoinsCount);
     }
 }

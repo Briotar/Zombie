@@ -13,22 +13,27 @@ public class Chest : MonoBehaviour
 
     private Animator _animator;
 
-    public event Action Opened;
+    public event Action<Chest> Opened;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
+
+        int coinCount = PlayerPrefs.GetInt("_chestCoinCount", -1);
+
+        if (coinCount > 0)
+            _rewardsCount = coinCount;
     }
 
     public void Open()
     {
-        Opened.Invoke();
+        Opened.Invoke(this);
 
         _coinEffect.SetActive(false);
         _animator.SetBool(AnimatorChestController.Params.IsChestOpened, true);
 
         StartCoroutine(EffectDelay());
-        RewardsManager.Instance.SpawnReward(_chestCenter, _rewardsCount);
+        SpawnCoins();
     }
 
     private IEnumerator EffectDelay()
@@ -36,5 +41,10 @@ public class Chest : MonoBehaviour
         yield return new WaitForSeconds(_timeDelay);
 
         _effect.Play();
+    }
+
+    public void SpawnCoins()
+    {
+        RewardsManager.Instance.SpawnReward(_chestCenter, _rewardsCount);
     }
 }

@@ -126,6 +126,23 @@ MonoBehaviour:
     m_Localized: "SEV\u0130YE SE\xC7"
     m_Metadata:
       m_Items: []
+  - m_Id: 3323662482718720
+    m_Localized: Veya
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3323811959324672
+    m_Localized: "g\xF6\u011F\xFCste +3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3651209057714176
+    m_Localized: kapat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7291271712522240
+    m_Localized: "Hareket etmek i\xE7in ekran\u0131 veya WASD tu\u015Flar\u0131n\u0131
+      kullan\u0131n. Zombileri vur ve evlerine ula\u015Fmalar\u0131na izin verme!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

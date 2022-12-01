@@ -17,7 +17,7 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 69ea3aa199174a94eae967ed427fbfaf, type: 2}
   m_Metadata:
     m_Items:
-    - rid: 472210751815942414
+    - rid: 472211200561119710
   m_TableData:
   - m_Id: 102791450624
     m_Localized: WAVE CLEARED
@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Localized: WAVE {WaveView.CurrentWaveString}
     m_Metadata:
       m_Items:
-      - rid: 472210751815942414
+      - rid: 472211200561119710
   - m_Id: 4269526290432
     m_Localized: CHOOSE AN UPGRADE
     m_Metadata:
@@ -124,10 +124,27 @@ MonoBehaviour:
     m_Localized: SHOOSE LEVEL
     m_Metadata:
       m_Items: []
+  - m_Id: 3323662482718720
+    m_Localized: Or
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3323811959324672
+    m_Localized: +3 in chest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3651209057714176
+    m_Localized: close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7291271712522240
+    m_Localized: To move, use the screen or the WASD keys. Shoot the zombies and
+      don't let them get to your house!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
-    - rid: 472210751815942414
+    - rid: 472211200561119710
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
         m_Entries: 001099e48e020000

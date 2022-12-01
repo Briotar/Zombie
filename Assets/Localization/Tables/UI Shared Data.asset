@@ -119,14 +119,30 @@ MonoBehaviour:
     m_Key: ShooseLevel
     m_Metadata:
       m_Items: []
+  - m_Id: 3323662482718720
+    m_Key: Or
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3323811959324672
+    m_Key: Chest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3651209057714176
+    m_Key: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7291271712522240
+    m_Key: Training
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 472210746774913377
+    rid: 472211130706559036
   references:
     version: 2
     RefIds:
-    - rid: 472210746774913377
+    - rid: 472211130706559036
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
         m_CustomEpoch: 1667897339184
