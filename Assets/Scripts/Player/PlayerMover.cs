@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private FloatingJoystick _joystick;
-    [SerializeField] private float _rotationLerpSpeed = 0.09f;
+    [SerializeField] private float _rotationLerpSpeed = 0.15f;
     [SerializeField] private float _speed;
 
     private Rigidbody _rigidbody;
@@ -21,19 +21,42 @@ public class PlayerMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody.velocity = new Vector3(_joystick.Horizontal * _speed, _rigidbody.velocity.y, _joystick.Vertical * _speed);
+        MoveWithTouch();
+        MoveWithKeyboard();
 
         if (_shooter.IsShoot)
             LookAtEnemy(_shooter.TargetPosition);
 
-        if(_joystick.Vertical != 0)
-            if (_rigidbody.velocity.magnitude > _minVelocity)
-            {
-                if (_shooter.IsShoot)
-                    LookAtEnemy(_shooter.TargetPosition);
-                else
-                    LookForward();
-            }
+        if (_rigidbody.velocity.magnitude > _minVelocity)
+        {
+            if (_shooter.IsShoot)
+                LookAtEnemy(_shooter.TargetPosition);
+            else
+                LookForward();
+        }
+    }
+
+    private void MoveWithKeyboard()
+    {
+        if (Input.GetKey(KeyCode.W))
+            _rigidbody.velocity += Vector3.forward * _speed;
+
+        if (Input.GetKey(KeyCode.S))
+            _rigidbody.velocity += Vector3.back * _speed;
+
+        if (Input.GetKey(KeyCode.A))
+            _rigidbody.velocity += Vector3.left * _speed;
+
+        if (Input.GetKey(KeyCode.D))
+            _rigidbody.velocity += Vector3.right * _speed;
+
+        if (_rigidbody.velocity.magnitude >= _speed)
+            _rigidbody.velocity = _rigidbody.velocity.normalized * _speed;
+    }
+
+    private void MoveWithTouch()
+    {
+        _rigidbody.velocity = new Vector3(_joystick.Horizontal * _speed, _rigidbody.velocity.y, _joystick.Vertical * _speed);
     }
 
     private void LookAtEnemy(Vector3 target)

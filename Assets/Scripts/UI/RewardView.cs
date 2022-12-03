@@ -4,26 +4,42 @@ using TMPro;
 public class RewardView : MonoBehaviour
 {
     [SerializeField] private PlayerCollector _playerCollector;
-    [SerializeField] private TMP_Text _rewardsCount;
+    [SerializeField] private TMP_Text _whiteCoinsCount;
+    [SerializeField] private TMP_Text _redCoinsCount;
 
     private void OnEnable()
     {
-        _playerCollector.CoinsCountChanged += (int count) =>
+        _playerCollector.WhiteCoinsCountChanged += (int count) =>
         {
-            ShowRewardsCount(count);
+            ShowWhiteCoinsCount(count);
+        };
+
+        _playerCollector.RedCoinsCountChanged += (int count) =>
+        {
+            ShowRedCoinsCount(count);
         };
     }
 
     private void OnDisable()
     {
-        _playerCollector.CoinsCountChanged -= (int count) =>
+        _playerCollector.WhiteCoinsCountChanged -= (int count) =>
         {
-            ShowRewardsCount(count);
+            ShowWhiteCoinsCount(count);
+        };
+
+        _playerCollector.RedCoinsCountChanged -= (int count) =>
+        {
+            ShowRedCoinsCount(count);
         };
     }
 
-    private void ShowRewardsCount(int count)
+    private void ShowWhiteCoinsCount(int count)
     {
-        _rewardsCount.text = count.ToString();
+        _whiteCoinsCount.text = count.ToString();
+    }
+
+    private void ShowRedCoinsCount(int count)
+    {
+        _redCoinsCount.text = count.ToString();
     }
 }

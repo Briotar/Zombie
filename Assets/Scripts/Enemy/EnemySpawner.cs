@@ -5,6 +5,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private SpawnPointsList _spawnPointList;
     [SerializeField] private Enemy[] _enemies;
+    [SerializeField] private Enemy _boss;
 
     [SerializeField] private float _timeToSpawnEmemies = 3f;
     [SerializeField] private int _maxEnemiesOnSpawn = 4;
@@ -14,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
     private int _spawnedEnemiesCount = 0;
     private float _currentTime;
     private bool _isCanSpawn = true;
+    private bool _isBossWave = false;
 
     private int _spawnCounter = 0;
 
@@ -27,7 +29,11 @@ public class EnemySpawner : MonoBehaviour
         if(_isCanSpawn)
             if (_currentTime >= _timeToSpawnEmemies)
             {
-                SpawnEnemies();
+                if (_isBossWave)
+                    StartBossWave();
+                else
+                    SpawnEnemies();
+
                 _currentTime = 0;
             }
             else
@@ -39,18 +45,10 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemies()
     {
         int currentEnemyCount = 0;
-        //System.Random rand = new System.Random();
+        System.Random rand = new System.Random();
 
-        int maxEnemyCountSpawn;
-        //int maxEnemyCountSpawn = rand.Next(_minEnemiesOnSpawn, _maxEnemiesOnSpawn + 1);
+        int maxEnemyCountSpawn = rand.Next(_minEnemiesOnSpawn, _maxEnemiesOnSpawn + 1);
         Vector3 spawnPoint = _spawnPointList.GetSpawnPoint();
-
-        if(_spawnCounter == 0)
-            maxEnemyCountSpawn = 3;
-        else if(_spawnCounter == 1)
-            maxEnemyCountSpawn = 4;
-        else 
-            maxEnemyCountSpawn = 2;
 
         for (int i = 0; i < _enemies.Length; i++)
         {
@@ -76,9 +74,26 @@ public class EnemySpawner : MonoBehaviour
         _spawnCounter++;
     }
 
+    private void StartBossWave()
+    {
+        _isCanSpawn = false;
+
+        Vector3 spawnPoint = _spawnPointList.GetSpawnPoint();
+
+        _boss.transform.position = spawnPoint;
+        _boss.gameObject.SetActive(true);
+    }
+
     public void StartWave(int maxEnemiesOnWave)
     {
         _maxEnemiesOnWave = maxEnemiesOnWave;
+        _spawnedEnemiesCount = 0;
+        _isCanSpawn = true;
+    }
+
+    public void SetBossWave()
+    {
+        _isBossWave = true;
         _isCanSpawn = true;
     }
 }

@@ -7,6 +7,7 @@ public class EnemyHealthBar : MonoBehaviour
     [SerializeField] private Image _damageEffect;
     [SerializeField] private float _lerpSpeed = 0.02f;
 
+    private Vector3 _localScale;
     private Quaternion _startRotation;
     private Slider _slider;
 
@@ -27,11 +28,14 @@ public class EnemyHealthBar : MonoBehaviour
         {
             ChangeHealth(currentHealth);
         };
+
+        _slider.transform.localScale = _localScale;
     }
 
     private void Start()
     {
         _startRotation = transform.rotation;
+        _localScale = _slider.transform.localScale;
     }
 
     private void Update()

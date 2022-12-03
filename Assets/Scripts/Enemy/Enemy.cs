@@ -5,19 +5,22 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyMover))]
 [RequireComponent(typeof(EnemyEffects))]
 [RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(EnemyAttacker))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private Transform _enemyCenter;
     [SerializeField] private float _maxHealth;
     [SerializeField] private Canvas _canvas;
     [SerializeField] private Animator _animatorCanvas;
+    [SerializeField] private EnemyMover _mover;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private bool _isBoss = false;
 
     private float _minPlayerDamage = 25;
     private float _currentHealth;
-    private Animator _animator;
-    private EnemyMover _mover;
     private Collider _collider;
     private EnemyEffects _effects;
+    private EnemyAttacker _attacker;
 
     public event Action Died;
     public event Action<float> HealthChanged;
@@ -25,7 +28,9 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         _collider = GetComponent<Collider>();
+        _attacker = GetComponent<EnemyAttacker>();
 
+        _animatorCanvas.enabled = false;
         _currentHealth = _maxHealth;
         _collider.enabled = true;
         _canvas.gameObject.SetActive(true);
@@ -33,8 +38,6 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
-        _mover = GetComponent<EnemyMover>();
         _effects = GetComponent<EnemyEffects>();
     }
 
@@ -72,11 +75,14 @@ public class Enemy : MonoBehaviour
     private void PrepareToDie()
     {
         _effects.PLayDeathEffect();
-        _mover.StopMovement();
+        _mover.StartDying();
         _collider.enabled = false;
         _animatorCanvas.enabled = true;
 
-        RewardsManager.Instance.SpawnReward(_enemyCenter);
+        if (_isBoss)
+            RewardsManager.Instance.SpawnRedReward(_enemyCenter, 1);
+        else
+            RewardsManager.Instance.SpawnReward(_enemyCenter);
 
         _animator.SetBool(AnimatorEnemyController.Params.IsDying, true);
     }
@@ -93,5 +99,16 @@ public class Enemy : MonoBehaviour
         _mover.MoveUnderGround();
 
         StartCoroutine(DyingCoroutine());
+    }
+
+    public void SetTarget(Transform building)
+    {
+        _mover.SetTarget(building);
+    }
+
+    public void ChangeAttackPoint()
+    {
+        _mover.ChangeAttackPoint();
+        _attacker.StopAttack();
     }
 }

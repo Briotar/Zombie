@@ -1,26 +1,17 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class PlayerAnimationsController : MonoBehaviour
 {
     [SerializeField] private FloatingJoystick _joystick;
     [SerializeField] private Animator _animator;
-
-    private Rigidbody _rigidbody;
-    private Shooter _shooter;
-    private QuarterChooser _quarterChooser;
+    [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private Shooter _shooter;
+    [SerializeField] private QuarterChooser _quarterChooser;
 
     private float _minVelocity = 0.001f;
 
     private int _enemyQuarter;
     private int _directionQuarter;
-
-    private void Start()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-        _shooter = GetComponent<Shooter>();
-        _quarterChooser = GetComponent<QuarterChooser>();
-    }
 
     private void FixedUpdate()
     {
@@ -47,7 +38,7 @@ public class PlayerAnimationsController : MonoBehaviour
                     SetAnimatorState(false, true, false, false);
                 }
             else
-                SetAnimatorState(false, false, false, true);
+                SetAnimatorState(true, false, false, true);
         }
         else
         {
@@ -74,6 +65,21 @@ public class PlayerAnimationsController : MonoBehaviour
 
     public void PlayShootAnimation()
     {
-        _animator.Play(AnimatorPlayerController.States.Fire);
+        _animator.SetBool(AnimatorPlayerController.Params.IsShooting, true);
+    }
+
+    public void StopShootAnimation()
+    {
+        _animator.SetBool(AnimatorPlayerController.Params.IsShooting, false);
+    }
+
+    public void SetShotgun()
+    {
+        _animator.SetBool(AnimatorPlayerController.Params.IsShotgun, true);
+    }
+
+    public void SetRifle()
+    {
+        _animator.SetBool(AnimatorPlayerController.Params.IsRifle, true);
     }
 }

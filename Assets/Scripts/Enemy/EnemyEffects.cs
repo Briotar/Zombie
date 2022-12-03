@@ -9,13 +9,20 @@ public class EnemyEffects : MonoBehaviour
     [SerializeField] private ParticleSystem _text8;
     [SerializeField] private ParticleSystem _explosion;
 
-    private Vector3 _startPosition;
+    private Vector3 _diedPosition;
+    private Vector3 _startPostion;
     private bool _isDying = false;
+
+    private void OnEnable()
+    {
+        _dying.transform.localPosition = _startPostion;
+        _isDying = false;
+    }
 
     private void Update()
     {
         if (_isDying)
-            _dying.transform.position = _startPosition;
+            _dying.transform.position = _diedPosition;
     }
 
     public void PlayHitEffetcs(bool isPlayer)
@@ -32,7 +39,8 @@ public class EnemyEffects : MonoBehaviour
 
     public void PLayDeathEffect()
     {
-        _startPosition = _dying.transform.position;
+        _startPostion = _dying.transform.localPosition;
+        _diedPosition = _dying.transform.position;
         _isDying = true;
         _dying.Play();
     }

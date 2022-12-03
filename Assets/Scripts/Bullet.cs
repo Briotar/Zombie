@@ -43,5 +43,9 @@ public class Bullet : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+        else if(other.GetComponent<House>())
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

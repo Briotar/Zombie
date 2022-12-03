@@ -1,18 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerAnimationsController))]
 public class PlayerGun : Gun
 {
     [SerializeField] private float _damage;
+    [SerializeField] private float _damageIncrease;
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private Bullet[] _bullets;
-
-    private PlayerAnimationsController _animationsController;
-
-    private void Start()
-    {
-        _animationsController = GetComponent<PlayerAnimationsController>();
-    }
+    [SerializeField] private PlayerAnimationsController _animationsController;
+    [SerializeField] private ParticleSystem _shotEffect;
 
     protected override void Shot()
     {
@@ -29,6 +24,25 @@ public class PlayerGun : Gun
                 break;
             }
         }
+
+        _shotEffect.Play();
     }
 
+    public void SetShootPoint(Transform newShootPoint, ParticleSystem newShotEffect)
+    {
+        _shootPoint = newShootPoint;
+        _shotEffect = newShotEffect;
+    }
+
+    public void IncreaseDamage()
+    {
+        _damage += _damageIncrease;
+
+        ProgressSaver.Instance.SaveDamage((int)_damage);
+    }
+
+    public void LoadDamageUpgrade(int damage)
+    {
+        _damage = damage;
+    }
 }
